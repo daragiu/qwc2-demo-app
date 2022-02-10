@@ -13,7 +13,7 @@ Minimul necesar este reprezentat de un mediu pentru serverul de QGIS. Proiectele
 În plus, este necesar și un server web care va servi aplicația QWC2.
 
 
-## <a name="quick-start"></a>Inițializare
+## <a id="quick-start"></a>Inițializare
 
 QWC2 este împărțit în două părți:
 
@@ -88,7 +88,7 @@ Principalul aspect de reținut este că o aplicație QWC2 constă dintr-o colec�
 Fișierul `js/appConfig.js` este fișierul care configurează build-ul și definește:
 - Localizarea implicită a aplicației, încorporată în aplicație. Această localizare este utilizată dacă nicio altă localizare disponibilă nu corespunde localizării browserului.
 - Ce pluginuri sunt încorporate în aplicație. Pluginurile lăsate aici vor fi complet omise la compilarea pachetului de aplicații și, prin urmare, vor reduce și dimensiunea pachetului.
-- Diverse funcții tip cârlig, așa cum este documentat în exmeplu [exemplu `js/appConfig.js`](https://github.com/qgis/qwc2-demo-app/blob/master/js/appConfig.js).
+- Diverse funcții tip cârlig, așa cum este documentat în exemplu [exemplu `js/appConfig.js`](https://github.com/qgis/qwc2-demo-app/blob/master/js/appConfig.js).
 
 Fișierul `config.json` este fișierul de configurare în timpul rulării. Conține următoarele setări:
 
@@ -123,7 +123,7 @@ Toate setările sunt opționale, cu revenirea la valorile implicite, așa cum es
 |`externalLayerFeatureInfoFormats`    | Un dicționar de formate de informații despre caracteristici pentru straturi externe, în format `{"<url>": "<format>", ...}`. Dacă adresa URL GetFeatureInfo a unui strat conține conținutul specificat `<url>`, se utilizează formatul corespunzător. |
 |`storeAllLayersInPermalink`          | Ori stocați întregul arbore de straturi în datele permalink-ului, ori numai în straturile locale. Dacă este false, straturile la distanță sunt re-interogate de la serviciile respective, dacă sunt true, acestea sunt reîncărcate static (ceea ce înseamnă că straturile restaurate pot fi vechi în comparație cu capabilitățile serviciului actual). |
 
-*Setări globale, suprascrise pentru fiecare temă*:<a name="config-json-overridable"></a>
+*Setări globale, suprascrise pentru fiecare temă*:<a id="config-json-overridable"></a>
 
 Următoarele opțiuni pot fi specificate la nivel global și, de asemenea, suprascrise pe temă, vezi [`themesConfig.json`](#themesConfig-json).
 Toate setările sunt opționale, cu revenirea la valorile implicite, așa cum este documentat.
@@ -165,7 +165,7 @@ unde
 
 * `name`: Numele pluginului.
 * `cfg`: Opțional: proprietăți de configurare arbitrare, transmise direct clasei de plugin-uri relative ca elemente de React props.
-* `mapClickAction`: Opțional: pentru pluginurile care sunt asociate unei sarcini de vizualizare (și de obicei legate în `menuItems` sau `toolbarItems` ale `TopBar`, vezi mai jos), determină dacă un clic pe hartă va duce la apariția instrumentului de identificare, la anularea sarcinii sau dacă nu trebuie efectuată nicio acțiune anume (implicit). Mențiune: `"mapClickAction"` trebuie să fie `null` omis pentru pluginurile care gestionează acțiunile mouse-ului de pe hartă. Opțional, poate fi specificat și direct în `menuItems` sau `toolbarItems` datele introduse, vezi mai jos.
+* `mapClickAction`: Opțional: pentru pluginurile care sunt asociate unei sarcini de vizualizare (și de obicei legate în `menuItems` sau `toolbarItems` ale `TopBar`, vezi mai jos), determină dacă un click pe hartă va duce la apariția instrumentului de identificare, la anularea sarcinii sau dacă nu trebuie efectuată nicio acțiune anume (implicit). Mențiune: `"mapClickAction"` trebuie să fie `null` omis pentru pluginurile care gestionează acțiunile mouse-ului de pe hartă. Opțional, poate fi specificat și direct în `menuItems` sau `toolbarItems` datele introduse, vezi mai jos.
 
 Puteți omite un plugin pentru al dezactiva în modul desktop și/sau mobil. Pentru a elimina complet un plugin din aplicația compilată, eliminațil direct din `js/appConfig.js`.
 
@@ -175,7 +175,7 @@ Un aspect deosebit de interesant este configurarea datelor introduse din meniul 
 
 unde
 
-* `key`: Numele pluginului de activat când se face clic pe date, spre exemplu `LayerTree`. De asemenea, folosit pentru a căuta eticheta pentru datele din traduceri, folosind `appmenu.items.<key>` message identifier (vezi <a href="#translations">Gestionarea traducerilor</a>).
+* `key`: Numele pluginului de activat când se face click pe date, spre exemplu `LayerTree`. De asemenea, folosit pentru a căuta eticheta pentru datele din traduceri, folosind `appmenu.items.<key>` message identifier (vezi <a href="#translations">Gestionarea traducerilor</a>).
 * `icon`: Pictograma datelor introduse, fie un nume (fără extensia `.svg`) a unei pictograme din `icons/`, sau `:/<path_to_asset>` conţinând calea către `assetsPath` a unei imagini de tip asset.
 * `themeWhitelist`: Opțional, permite specificarea unui whitelist (listă cu permisiuni) de nume de teme sau titluri pentru care intrarea ar trebui să fie vizibilă.
 * `mapClickAction`: Opțional, are prioritate asupra setării `mapClickAction` specificată în blocul de configurare a pluginului, dacă există. Vezi mai sus.
@@ -190,7 +190,7 @@ unde
 
 * `key`: Un nume de cheie arbitrar (nu este folosit de către pluginurile existente), folosit pentru a căuta eticheta pentru datele introduse din traduceri.
 * `icon`: Ca mai sus.
-* `url`: Adresa URL de accesat. Poate conține ca substituenți cheile enumerate în <a href="#url-parameters">URL parameters</a>, închise în `$` (ex. `$e$` pentru măsură). În plus, substituenții `$x$` și `$y$` pentru coordonatele individuale ale centrului hărții sunt de asemenea acceptate.
+* `url`: Adresa URL de accesat. Poate conține ca substituenți cheile enumerate în <a href="#url-parameters">parametrii URL-ului</a>, închise în `$` (ex. `$e$` pentru măsură). În plus, substituenții `$x$` și `$y$` pentru coordonatele individuale ale centrului hărții sunt de asemenea acceptate.
 
 
 
@@ -218,7 +218,7 @@ Primul pas este pregătirea unui proiect QGIS. Pe lângă sarcinile comune de ad
 | Print layouts        | Layout manager                            | Moduri de imprimate oferite de pluginul Print.  |
 | Print layout labels  | Layout manager                            | Etichetele de imprimare cu un ID o să fie vizibile în pluginul Print. |
 
-#### <a name="themesConfig-json"></a>Configurarea temei din `themesConfig.json`
+#### <a id="themesConfig-json"></a>Configurarea temei din `themesConfig.json`
 
 Al doilea pas este să configurați temele care sunt disponibile pentru QWC2 în fișierul `themesConfig.json`, care conține o listă de teme, opțional organizate în grupuri, precum și o listă de straturi de fundal::
 
@@ -258,7 +258,7 @@ RConsultați [exemplul `themesConfig.json`](https://github.com/qgis/qwc2-demo-ap
 
 Formatul temei este următorul:
 <!-- Important: Use U+00A0 non-breaking spaces ( ) in code blocks -->
-| Date introduse                               | Descriere                                                                         |
+| Date de intrare                              | Descriere                                                                         |
 |----------------------------------------------|-----------------------------------------------------------------------------------|
 | `"url": "<WMS URL>",`                        | Adresa WMS-ului dorit deservit de QGIS Server.                                    |
 | `"wmsBasicAuth": "{`                         | Opțional, permite autentificarea la QGIS Server cu ajutorul themes.json. Mențiune: aceste acreditări vor fi utilizate numai de `yarn run themesConfig` și nu vor fi salvate în `themes.json`.|
@@ -290,10 +290,10 @@ Formatul temei este următorul:
 | `  "name": "<external_layer_name>",`          | Numele stratului extern, care se potrivește cu `ExternalLayerDefinition`, vezi mai jos.     |
 | `  "internalLayer": "<QGis_layer_name>"`      | Numele unui strat intern, așa cum este conținut în proiectul QGIS, de înlocuit cu stratul extern. |
 | `}],`                                         |                                                                                  |
-| `"themeInfoLinks": {`                         | Opțional, linkuri personalizate către resurse suplimentare, afișate ca meniu în selectorul de teme din theme switcher. |
+| `"themeInfoLinks": {`                         | Opțional, link-uri personalizate către resurse suplimentare, afișate ca meniu în selectorul de teme din theme switcher. |
 | `  "title": "<Menu title>",`                  | Un șir arbitrar afișat drept titlu al meniului.                                  |
 | `  "titleMsgId": "<Menu title msgID>",`       | O alternativă la `title`, un ID de mesaj, tradus prin fișierele de traducere.  |
-| `  "entries": [<link_name>, ...]`             | Lista numelor de linkuri cu informații despre teme, vezi mai jos.                                        |
+| `  "entries": [<link_name>, ...]`             | Lista numelor de link-uri cu informații despre teme, vezi mai jos.                                        |
 | `},`                                          |                                                                                  |
 | `"backgroundLayers": [{,`                     | Opțional, lista de straturi de fundal disponibile.                                   |
 | `  "name": "<Background layer name>",`        | Numele potrivirii cu `BackgroundLayerDefinition`, vezi mai jos.                         |
@@ -328,80 +328,80 @@ Formatul temei este următorul:
 | `}`                                           |
 
 **Straturi externe:**
-External layers can be used to selectively replace layers in a QGIS project, for instance in the case of a WMS layer embedded in a QGIS project, to avoid cascading WMS requests. They are handled transparently by QWC2 (they are positioned in the layer tree identically to the internal layer they replace), but the `GetMap` and `GetFeatureInfo` requests are sent directly to the specified WMS Service.
+Straturile externe pot fi folosite pentru a înlocui selectiv straturile într-un proiect QGIS, de exemplu, în cazul unui strat WMS încorporat într-un proiect QGIS, pentru a evita solicitările WMS în cascadă. Acestea sunt gestionate în mod transparent de QWC2 (sunt poziționați în arborele straturilor identic cu stratul intern pe care îl înlocuiesc), dar cererile `GetMap` și `GetFeatureInfo` sunt trimise direct către serviciul WMS specificat.
 
-The format for external layer definitions is as follows:
+Formatul pentru definițiile straturilor externe este următorul:
 
-| Entry                                                  | Description                                                                       |
+| Date de intrare                                        | Descriere                                                                         |
 |--------------------------------------------------------|-----------------------------------------------------------------------------------|
-| `"name": "<external_layer_name>",`                     | The name of the external layer, as referenced in the theme definitions.           |
-| `"type": "<layer_type>",`                              | Layer type, "wms" or "wmts"                                                       |
-| `"url": "<wms_baseurl>",       `                       | The WMS URL or WMTS resource URL for the external layer.                          |
+| `"name": "<external_layer_name>",`                     | Numele stratului extern, așa cum este menționat în definițiile temei.             |
+| `"type": "<layer_type>",`                              | Tipul stratului, „wms” sau „wmts”                                                 |
+| `"url": "<wms_baseurl>",       `                       | URL-ul WMS sau URL-ul resursei WMTS pentru stratul extern.                        |
 
-For external WMS layers, the following additional parameters apply:
+Pentru straturile WMS externe, se aplică următorii parametri suplimentari:
 
-| Entry                                                  | Description                                                                       |
+| Date de intrare                                        | Descriere                                                                         |
 |--------------------------------------------------------|-----------------------------------------------------------------------------------|
-| `"params": {`                                          | Parameters for the GetMap request.                                                |
-| `  "LAYERS": "<wms_layername>,..."`,                   | WMS layer names.                                                                  |
-| `  "OPACITIES": "<0-255>,..."`                         | Optional, if WMS server supports opacities.                                       |
+| `"params": {`                                          | Parametrii pentru cererea de tip GetMap.                                          |
+| `  "LAYERS": "<wms_layername>,..."`,                   | Numele straturilor WMS.                                                           |
+| `  "OPACITIES": "<0-255>,..."`                         | Opțional, dacă serverul WMS acceptă opacități.                                    |
 | `},`                                                   |                                                                                   |
-| `"featureInfoUrl": "<wms_featureinfo_baseurl>",`       | Optional, base URL for WMS GetFeatureInfo, if different from `url`.               |
-| `"legendUrl": "<wms_legendgraphic_baseurl>"   ,`       | Optional, base URL for WMS GetLegendGraphic, if different from `url`.             |
-| `"queryLayers": ["<wms_featureinfo_layername>", ...],` | Optional, list of GetFeatureInfo query layers, if different from `params.LAYERS`. |
-| `"infoFormats": ["<featureinfo_format>", ...]`         | List of GetFeatureInfo query formats which the WMS service supports.              |
+| `"featureInfoUrl": "<wms_featureinfo_baseurl>",`       | Opțional, URL-ul de bază pentru WMS GetFeatureInfo, dacă este diferit de `url`.   |
+| `"legendUrl": "<wms_legendgraphic_baseurl>"   ,`       | Opțional, URL-ul de bază pentru WMS GetLegendGraphic, dacă este diferit de `url`. |
+| `"queryLayers": ["<wms_featureinfo_layername>", ...],` | Opțional, lista de straturi de interogare GetFeatureInfo, dacă diferă de `params.LAYERS`. |
+| `"infoFormats": ["<featureinfo_format>", ...]`         | Lista de formate de interogare GetFeatureInfo pe care le acceptă serviciul WMS.   |
 
-For external WMTS layers, the following additional parameters apply (you can use the `qwc2/scripts/wmts_config_generator.py` script to obtain these values):
+Pentru straturile WMTS externe, se aplică următorii parametri suplimentari (puteți folosi script-ul `qwc2/scripts/wmts_config_generator.py` pentru a obține următoarele valori):
 
-| Entry                                                  | Description                                                                       |
+| Date de intrare                                        | Descriere                                                                         |
 |--------------------------------------------------------|-----------------------------------------------------------------------------------|
-| `"tileMatrixSet": "<tile_matrix_set_name>",`           | The name of the tile matrix set.                                                  |
-| `"originX": <origin_x>,`                               | The X origin of the tile matrix.                                                  |
-| `"originY": <origin_y>,`                               | The Y origin of the tile matrix.                                                  |
-| `"projection": "EPSG:<code>",`                         | The layer projection.                                                             |
-| `"resolutions": [<resolution>, ...],`                  | The list of WMTS resolutions.                                                     |
-| `"tileSize": [<tile_width>, <tile_height>]`            | The tile width and height.                                                        |
+| `"tileMatrixSet": "<tile_matrix_set_name>",`           | Denumirea unui tile matrix set.                                                   |
+| `"originX": <origin_x>,`                               | Oringinea X a unui tile matrix.                                                   |
+| `"originY": <origin_y>,`                               | Oringinea Y a unui tile matrix.                                                   |
+| `"projection": "EPSG:<code>",`                         | Proiecția stratului                                                               |
+| `"resolutions": [<resolution>, ...],`                  | Lista rezoluțiilor WMTS.                                                          |
+| `"tileSize": [<tile_width>, <tile_height>]`            | Lățimea și înălțimea tile-ului                                                    |
 
-You can also set the "Data Url" for a layer in QGIS (Layer Properties &rarr; QGIS Server &rarr; Data Url) to a string of the form
+De asemenea, puteți seta „Data Url” pentru un strat în QGIS  (Layer Properties &rarr; QGIS Server &rarr; Data Url) la un șir de caractere din tabel
 
     wms:<service_url>#<layername>
 
-(for instance, `wms:http://wms.geo.admin.ch/?#ch.are.bauzonen`), and an external layer pointing to the specified WMS service will automatically be created for the corresponding QGIS layer.
-Note that this is currently only implemented for WMS layers.
+(sore exemplu, `wms:http://wms.geo.admin.ch/?#ch.are.bauzonen`), iar un strat extern care indică serviciul WMS specificat va fi creat automat pentru stratul QGIS corespunzător.
+Rețineți că acest lucru este implementat în prezent numai pentru straturi WMS.
 
 
-**Theme info links:**
-You can specify links to display in an info-menu next to the respective theme title in the theme switcher entries.
+**Link-uri cu informații despre teme:**
+Puteți specifica link-uri de afișat într-un meniu de informații lângă titlul temei respective în theme switcher.
 
-The format for the theme info links is as follows:
+Formatul pentru link-urile de informații ale temei este următorul:
 
-| Entry                                                  | Description                                                                       |
+| Date de intrare                                        | Descriere                                                                         |
 |--------------------------------------------------------|-----------------------------------------------------------------------------------|
-| `"name": "<link_name>",`                               | The name of the link, as referenced in the theme definitions.                     |
-| `"title": "<link_title>",`                             | The title for the link, as displayed in the info menu of the theme entry in the theme switcher. |
-| `"url": "<link>",`                                     | A link URL.                                                                       |
-| `"target": "<link_target>"`                            | The link target, i.e. `_blank`.                                                   |
+| `"name": "<link_name>",`                               | Numele linkului, așa cum este menționat în definițiile temei.                     |
+| `"title": "<link_title>",`                             | Titlul linkului, așa cum este afișat în meniul de informații al temei în theme switcher. |
+| `"url": "<link>",`                                     | O adresă URL a link-ului.                                                                       |
+| `"target": "<link_target>"`                            | Ținta linkului, spre exemplu `_blank`.                                                   |
 
 
-**Background layers:**
-Background layers are handled completely client-side and do not appear in the layer tree.
+**Straturi de fundal:**
+Straturile de fundal sunt menținute complet de partea clientului și nu apar în arborele de straturi.
 
-The format of the background layer definitions is as follows:
+Formatul definițiilor stratului de fundal este următorul:
 
-| Entry                        | Description                                                                       |
+| Date de intrare              | Descriere                                                                         |
 |------------------------------|-----------------------------------------------------------------------------------|
-| `"name": "<Name>",`          | The name of the background layer, used in the theme definitions.                  |
-| `"title": "<Title>",       ` | The title of the background layer, as displayed in the background switcher.       |
-| `"thumbnail": "<Filename>",` | Optional, image file in `assets/img/mapthumbs`. Defaults to `default.jpg`.        |
-| `"type": "<Type>",`          | The background layer type, i.e. `wms` or `wmts`.                                  |
-| `"group":  "<GroupId>",`     | Optional, a group ID string. Background layers with the same group ID will be grouped together in the background switcher. |
-| `"minScale": <min_scale>,`   | Optional, minimum scale denominator from which to render the layer.               |
-| `"maxScale": <max_scale>,`   | Optional, maximum scale denominator from which to render the layer.               |
-| `<Layer params>`             | Parameters according to the specified layer type. Refer to the [sample `themesConfig.json`](https://github.com/qgis/qwc2-demo-app/blob/master/themesConfig.json) for some examples. |
+| `"name": "<Name>",`          | Numele stratului de fundal, folosit în definițiile temei.                         |
+| `"title": "<Title>",       ` | Titlul stratului de fundal, așa cum este afișat în background switcher.           |
+| `"thumbnail": "<Filename>",` | Opțional, fișier tip imagine din `assets/img/mapthumbs`. Implicit la `default.jpg`.        |
+| `"type": "<Type>",`          | Tipul stratului de fundal, spre exemplu `wms` sau `wmts`.                                  |
+| `"group":  "<GroupId>",`     | Opțional, un șir de ID de grup. Straturile de fundal cu același ID de grup vor fi grupate împreună în background switcher. |
+| `"minScale": <min_scale>,`   | Opțional, numitorul de scară minimă de la care se redă stratul.               |
+| `"maxScale": <max_scale>,`   | Opțional, numitorul de scară maximă de la care să reda stratul.               |
+| `<Layer params>`             | Parametri în funcție de tipul de strat specificat. Consultați [sample `themesConfig.json`](https://github.com/qgis/qwc2-demo-app/blob/master/themesConfig.json) pentru cateva exemple. |
 
-*Note*: You can use the helper python script located at `qwc2/scripts/wmts_config_generator.py` to easily generate WMTS background layer configurations.
+*Mențiune*: Puteți utiliza scriptul python de ajutor localizat la `qwc2/scripts/wmts_config_generator.py` pentru a genera cu ușurință configurații ale stratului de fundal WMTS.
 
-Alternatively, a background layer definition can be a group of layers, in the format
+Alternativ, o definiție a stratului de fundal poate fi un grup de straturi, în format:
 
     {
       "name": "<Name>",
@@ -414,7 +414,7 @@ Alternatively, a background layer definition can be a group of layers, in the fo
       ]
     }
 
-Instead of specifiying a full background layer definition in a group, you can also reference an existing one with `"ref": "<bg_layer_name>"`, and selectively override certain properties, such as `minScale` and `maxScale`:
+În loc să specificați o definiție completă a stratului de fundal într-un grup, puteți face referire la unul existent cu `"ref": "<bg_layer_name>"`, și anulează selectiv anumite proprietăți, cum ar fi `minScale` și `maxScale`:
 
     {
       ...
@@ -428,21 +428,19 @@ Instead of specifiying a full background layer definition in a group, you can al
       ]
     }
 
-#### <a name="themes-json"></a>Generating `themes.json`
+#### <a id="themes-json"></a>Generând `themes.json`
 
-The final step is to generate `themes.json`, the file which is ultimately read by QWC2. This file combines the input from `themesConfig.json` with the information from the WMS service capabilities and is automatically generated when starting the local development application via `yarn start`. Alternatively, it can be manually generated via
-
+Pasul final este generarea `themes.json`, fișierul care este în cele din urmă citit de către QWC2. Acest fișier combină datele introduse `themesConfig.json` cu informațiile din capabilitățile serviciului WMS și este generat automat la pornirea aplicației de dezvoltare locală prin `yarn start`. Alternativ, poate fi generat manual prin:
     yarn run themesconfig
 
-or, if working in an environment without node, using the equivalent command
+sau, dacă se lucrează într-un mediu fără nod, folosind comanda echivalentă
 
     python3 qwc2/scripts/themesConfig.py
 
 
-If you want to manage multiple `themesConfig.json` files, you can specify which while should be processed by the theme generation script via the `QWC2_THEMES_CONFIG` environment variable.
+Dacă doriți să gestionați mai multe fișiere `themesConfig.json`, puteți specifica care ar trebui procesat de scriptul de generare a temei prin intermediul `QWC2_THEMES_CONFIG`.
 
-Note: if you are behind a proxy server and your `themesConfig.json` refers to resources outside the local network, you'll need to specify the proxy settings to use in `themesConfig.json` by adding a toplevel block of the form
-
+Mențiune: dacă sunteți în spatele unui server proxy și fișierul `themesConfig.json` se referă la resurse din afara rețelei locale, va trebui să specificați setările proxy în care să utilizați `themesConfig.json` prin adăugarea unui bloc de nivel superior al formularului:
     {
       "proxy": {
           "host": "<host>",
@@ -456,164 +454,164 @@ Note: if you are behind a proxy server and your `themesConfig.json` refers to re
       ...
     }
 
-### Implementing search providers in `js/SearchProviders.js`
+### Implementarea furnizorilor de căutare în `js/SearchProviders.js`
 
-Search providers are typically application specific, and hence need to be implemented in the application specific `js/SearchProviders.js` file. The [sample `js/SearchProviders.js`](https://github.com/qgis/qwc2-demo-app/blob/master/js/SearchProviders.js) documents how to implement search providers and contains some examples.
+Furnizorii de căutare sunt de obicei specifici aplicației și, prin urmare, trebuie implementați în fișierul `js/SearchProviders.js`. [sample `js/SearchProviders.js`](https://github.com/qgis/qwc2-demo-app/blob/master/js/SearchProviders.js) documentează modul de implementare a furnizorilor de căutare și conține câteva exemple.
 
-An advanced feature is the possibility to define parametrized search providers. This allows for instance to implement just a generic search provider interface in `js/SearchProviders.js` and move the implementation details to the service. To this end, you can also add to the `searchProviders` list in `themesConfig.json` entries of the form
+O caracteristică avansată este posibilitatea de a defini furnizorii de căutare parametrizați. Acest lucru permite, de exemplu, să implementați doar o interfață de furnizor de căutare generică în `js/SearchProviders.js`și mutați detaliile de implementare în serviciu. În acest scop, puteți adăuga, de asemenea, la `searchProviders` lista din `themesConfig.json` datele de intrare ale formularului:
 
     {key: <Key>, label: <Label>, ...}
 
 Such entries are passed to the method `searchProviderFactory` in `js/SearchProviders.js`, which you can tweak to dynamically create a search provider definition based on the parameters specified in the entry. Refer to the [sample  `js/SearchProviders.js`](https://github.com/qgis/qwc2-demo-app/blob/master/js/SearchProviders.js) for an example.
 
-### <a name="editing-interface"></a>Implementing the editing interface in `js/EditingInterface.js`
+### <a id="editing-interface"></a>Implementarea interfeței de editare în `js/EditingInterface.js`
 
-The QWC2 Editing plugin allows to add, remove and edit features from the map. For this to work, the following steps need to be performed:
+Pluginul de editare QWC2 permite adăugarea, eliminarea și editarea caracteristicilor de pe hartă. Pentru ca acest lucru să funcționeze, trebuie să efectuați următorii pași:
 
-- The Editing plugin needs to be enabled in `config.json` and `appConfig.js`.
-- The `editServiceUrl` needs to be specified in `config.json`.
-- The server-side service needs to be set up. The [default editing interface](https://github.com/qgis/qwc2/tree/master/utils/EditingInterface.js) is the conterpart for the [QWC data service](https://github.com/qwc-services/qwc-data-service). You can also use a custom editing service, in which case you need to implement a custom EditingInterface and pass it to the Editing plugin in `appConfig.js`.
-- For every theme for which editing is allowed, a matching `editConfig.json` needs to be implemented and specified in the corresponding entry in `themesConfig.json`.
+- Pluginul de editare trebuie să fie activat în `config.json` și `appConfig.js`.
+- Fișierul `editServiceUrl` trebuie să fie specificat în `config.json`.
+- Serviciul de pe partea serverului trebuie configurat. Fișierul [interfață de editare implicită](https://github.com/qgis/qwc2/tree/master/utils/EditingInterface.js) este omologul pentru [Serviciu de date QWC](https://github.com/qwc-services/qwc-data-service). De asemenea, puteți utiliza un serviciu de editare personalizat, caz în care trebuie să implementați un serviciu personalizat EditingInterface și transmis către pluginul Editing în `appConfig.js`.
+- Pentru fiecare temă pentru care este permisă editarea, o potrivire `editConfig.json` trebuie implementat și specificat în datele de intrare corespunzătoare din `themesConfig.json`.
 
-The format of the `editConfig.json` is as follows:
+Formatul `editConfig.json` este după cum urmează:
 
-| Entry                               | Description                                                   |
+| Date de intrare                     | Descriere                                                     |
 |-------------------------------------|---------------------------------------------------------------|
 | `{`                                 |                                                               |
-| `  <LayerId>: {`                    | A WMS layer ID. Should be a theme WMS layer name, to ensure the WMS is correctly refreshed. |
-| `    "layerName": "<LayerName>",`   | The layer name to show in the selection combo box. |
-| `    "geomType": "<GeomType>",`     | The geometry type, either `Point`, `LineString` or `Polygon`. |
-| `    "displayField":  "<FieldId">",`| The ID of the field to use in the feature selection menu.     |
-| `    "fields": [{`                  | A list of field definitions, for each exposed attribute.      |
-| `      "id": "<FieldID>",`          | The field ID.                                                 |
-| `      "name": "<FieldName>",`      | The field name, as displayed in the editing form.             |
-| `      "type": "<FieldType>",`      | A field type. Either `bool`, `list` or a regular [HTML input element type](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input). |
-| `      "constraints": {`            | Constraints for the input field.                              |
-| `        "values": [<Entries>],`    | Only if `type` is `list`: an array of arbitrary strings.      |
-| `        ...`                       | For regular HTML input types, the ReactJS API name of any applicable [HTML input constraint](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input), i.e. `maxLength` or `readOnly`. |
+| `  <LayerId>: {`                    | Un ID de strat WMS. Ar trebui să fie un nume de strat WMS temă, pentru a vă asigura că WMS-ul este reîmprospătat corect. |
+| `    "layerName": "<LayerName>",`   | Numele stratului de afișat în fereastra combinată de selecție. |
+| `    "geomType": "<GeomType>",`     | Tipul de geometrie, fie `Point`, `LineString` sau `Polygon`. |
+| `    "displayField":  "<FieldId">",`| ID-ul câmpului de utilizat în meniul de selecție a caracteristicilor.     |
+| `    "fields": [{`                  | O listă de definiții de câmp, pentru fiecare atribut afișat.      |
+| `      "id": "<FieldID>",`          | ID-ul câmpului.                                                |
+| `      "name": "<FieldName>",`      | Numele câmpului, așa cum este afișat în formularul de editare.             |
+| `      "type": "<FieldType>",`      | Un tip de câmp. Fie `bool`, `list` sau un simplu [elemente de intrare tip HTML](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input). |
+| `      "constraints": {`            | Constrângeri pentru câmpul de intrare.                             |
+| `        "values": [<Entries>],`    | Numai dacă `type` este `list`: o matrice de șiruri de caractere arbitrare.     |
+| `        ...`                       | Pentru tipurile obișnuite de introducere HTML, numele ReactJS API al oricărui aplicabil [Constrângere de intrare de tip HTML](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input), i.e. `maxLength` or `readOnly`. |
 | `      }`                           |                                                               |
 | `    }],`                           |                                                               |
-| `    "form": "<PathToUiFile>",`     | As alternative to `fields`, a QtDesigner UI file. See below.  |
+| `    "form": "<PathToUiFile>",`     | Ca alternativă la `fields`, un fișier QtDesigner UI. Vezi mai jos.  |
 | `  }`                               |                                                               |
 | `}`                                 |                                                               |
 
-* If you specify `fields`, a simple form is autogenerated based on the field definitions.
-* If you specify `form`, you can specify the URL to a Qt Designer UI form (use `:/<path>` to specify a path below the `assets` folder). Most basic input elements provided by QtDesigner are supported, see [this sample form](https://github.com/qgis/qwc2-demo-app/blob/master/assets/forms/form.ui). The widget names must be set equal to the attribute names.
+* Dacă specificați `fields`, un formular simplu este generat automat pe baza definițiilor câmpurilor.
+* Dacă specificați `form`, puteți specifica adresa URL a unui formular Qt Designer UI (utilizați `:/<path>` pentru a numi calea catre fișierul `assets`). Cele mai multe elemente de intrare de bază furnizate de QtDesigner sunt acceptate, vezi [acest exemplu de formular](https://github.com/qgis/qwc2-demo-app/blob/master/assets/forms/form.ui). Numele widgetului trebuie să fie setat la fel ca numele atributelor.
 
-See the [sample `editConfig.json`](https://github.com/qgis/qwc2-demo-app/blob/master/test2056_edit.json) for a full example. See also the [QWC data service README](https://github.com/qwc-services/qwc-data-service/blob/master/README.md).
+Vezi [exemplul `editConfig.json`](https://github.com/qgis/qwc2-demo-app/blob/master/test2056_edit.json). Vezi, de asemenea, [Serviciu de date QWC README](https://github.com/qwc-services/qwc-data-service/blob/master/README.md).
 
-### <a name="translations"></a>Managing translations
+### <a id="translations"></a>Gestionarea traducerilor
 
-The translations are managed on two levels:
+Traducerile sunt gestionate pe două niveluri:
 
-- At QWC2 components level, in `qwc2/translations`.
-- At application level, in `translations`.
+- La nivelul componentelor QWC2, în `qwc2/translations`.
+- La nivel de aplicație, în `translations`.
 
-A script will take care of merging the component translations into the application translations. This way, when updating the QWC2 submodule, new translations are automatically obtained. This script is automatically invoked on `yarn start`, but can also be manually invoked using
+Un script se va ocupa de îmbinarea traducerilor componente în traducerile aplicației. În acest fel, la actualizarea submodulului QWC2, se obțin automat noi traduceri. Acest script este invocat automat `yarn start`, dar poate fi, de asemenea, chemat manual folosind:
 
     yarn run tsupdate
 
-Translations are stored inside the respective `translations` folder as regular plain-text JSON files, named `<locale>.json` and can be freely edited with any text editor.
+Traducerile sunt stocate în folder-ul `translations` ca fișiere JSON obișnuite cu text simplu, denumit `<locale>.json` și poate fi editat cu orice editor de text.
 
-The `tsconfig.json` files stored inside the respective `translations` folder contains the list of languages for which translations should be generated and a list of message IDs to include in the translation. The `tsupdate` script will automatically scan for message IDs (looking for static strings passed to `LocaleUtils.tr` and `LocaleUtils.trmsg`), store these in `tsconfig.json` and automatically create resp. update the translation files.
+Fisierele `tsconfig.json` stocate în interiorul folder-ului `translations` care conține lista de limbi pentru care ar trebui să fie generate traduceri și o listă de ID-uri de mesaje de inclus în traducere. Script-ul `tsupdate` va verifica automat ID-urile mesajelor (căutând șiruri statice transmise către `LocaleUtils.tr` și `LocaleUtils.trmsg`), stocate în `tsconfig.json` și creează automat sau actualizează fișierele de traducere.
 
-In some cases `tsconfig.json` will not pick up a message ID (for instance, if it is computed at runtime). In these cases, the message IDs can be added manually to the `extra_strings` section of the `tsconfig.json`.
+În unele cazuri `tsconfig.json` nu va prelua un ID de mesaj (de exemplu, dacă este calculat în timpul execuției). În aceste cazuri, ID-urile mesajelor pot fi adăugate manual în `extra_strings` secțiunea `tsconfig.json`.
 
-Also it may be desired to override a translation inherited from the QWC2 components at application level. To prevent `tsupdate` from continuously reverting the overridden translation, the respective message IDs can be added to the `overrides` section in the application `tsconfig.json` file.
+De asemenea, se poate suprascrierea o traducere venită din componentele QWC2 la nivel de aplicație. Pentru a preveni `tsupdate` de la revenirea continuă a traducerii suprascrise, ID-urile mesajelor respective poate fi adăugat la secțiunea `overrides` în fișierul `tsconfig.json`.
 
-The typical workflow for managing application translations is:
+Fluxul de lucru tipic pentru gestionarea traducerilor aplicațiilor este:
 
-- Declare all locales which should be supported in `js/appConfig.js`.
-- Ensure these locales are listed in `translations/tsconfig.json`.
-- Write the translated strings to the respective `<locale>.json` files.
-- Test the translation, specifying `locale=<locale>` in the QWC2 application URL.
+- Declarați toate locațiile care ar trebui să fie luate în considerare, în`js/appConfig.js`.
+- Asigurați-vă că aceste locații sunt listate în `translations/tsconfig.json`.
+- Scrieți șirurile de caractere traduse în fișierul `<locale>.json`.
+- Verificați traducerea, specificând `locale=<locale>` în adresa URL a aplicației QWC2.
 
-If translations of the QWC2 components for a desired language are missing, please create resp. update the translations respective files in `qwc2/translations` and contribute them by submitting a pull request to the [upstream qwc2 repository](https://github.com/qgis/qwc2).
+Dacă lipsesc traduceri ale componentelor QWC2 pentru o limbă dorită, vă rugăm să creați sau actualizați traducerile fișierelor respective din `qwc2/translations` și contribuiți cu ele trimițând un pull request la [upstream qwc2 repository](https://github.com/qgis/qwc2).
 
-### <a name="appearance-customization"></a>Customizing the QWC2 appearance
+### <a id="appearance-customization"></a>Personalizarea aspectului QWC2
 
-The following options are available for customizing the appearance of the QWC2 application while preserving compatibility with the core QWC2 components:
+Următoarele opțiuni sunt disponibile pentru personalizarea aspectului aplicației QWC2, păstrând în același timp compatibilitatea cu componentele de bază QWC2:
 
-- Modifying the logo in `assets/img/`.
-- Modifying the application icons in `icons`.
-- Tweaking the colors in `styleConfig.js`.
-- Adding style declarations to the master CSS stylesheet `assets/css/qwc2.css`. This however is potentially fragile and should only be done as a last resort.
-- Changing the browser page title in `index.html`, and potentially adding a favicon.
-- Modifying the legend print template in `assets/templates/legendprint.html`. The only requirement for this template is that is must contain a `<div id="legendcontainer"></div>` element.
-- Modifying the custom Help component `js/Help.jsx`.
+- Modificarea siglei în `assets/img/`.
+- Modificarea pictogramelor aplicației în `icons`.
+- Modificarea culorilor în `styleConfig.js`.
+- Adăugarea declarațiilor de stil la fișierul de stilizare CSS principal `assets/css/qwc2.css`. Totuși, acest lucru este potențial fragil și ar trebui făcut doar ca ultimă variantă.
+- Schimbarea titlului paginii browser în `index.html`, și eventual adăugarea unui favicon.
+- Modificarea șablonului de imprimare a legendei în `assets/templates/legendprint.html`. Singura cerință pentru acest șablon este că trebuie să conțină elementul `<div id="legendcontainer"></div>`.
+- Modificarea componentei de ajutor personalizat `js/Help.jsx`.
 
-*Note*: The common application icons are located in `qwc2/icons`. They can be overridden by creating an icon with the same filename in the application specific `icons` folder.
-*Note*: The icons in the `icons` folder are compiled into an icon font. Currently, the icons need to be black content on transparent background, and all drawings (including texts) must be converted to paths for the icons to render correctly.
+*Mențiune*: Pictogramele comune ale aplicațiilor sunt situate în `qwc2/icons`. Acestea pot fi suprascrise prin crearea unei pictograme cu același nume de fișier în aplicația specifică folder-ului `icons`.
+*Mențiune*: Pictogramele din folder-ul `icons` sunt compilate într-un font pictogramă. În prezent, pictogramele trebuie să aibă conținut negru pe fundal transparent, iar toate desenele (inclusiv textele) trebuie convertite în căi pentru ca pictogramele să fie redate corect.
 
 
-## Server-side configuration
-### <a name="cross-origin-requests"></a>Cross-Origin requests
-All modern browsers will block a page from requesting resources from another origin (except for images, stylesheets, scripts, iframes and videos), unless the response from the remote origin contains a matching `Access-Control-Allow-Origin` header. An origin is defined as `<scheme>://<hostname>:<port>`.
+## Configurare pe partea serverului
+### <a id="cross-origin-requests"></a>Solicitări încrucișate
+Toate browserele moderne vor bloca o pagină să nu solicite resurse din altă parte (cu excepția imaginilor, fișierelor de stilizare, scripturilor, cadrelor iframe și videoclipurilor), cu excepția cazului în care răspunsul de la originea la distanță conține o potrivire a headeru-lui `Access-Control-Allow-Origin`. O origine este definită ca `<scheme>://<hostname>:<port>`.
 
-For each service QWC2 interacts with, in particular the QGIS Server, one has to ensure that this interaction isn't blocked by the browser. The following options exist:
+Pentru fiecare serviciu cu care interacționează QWC2, în special cu serverul QGIS, trebuie să vă asigurați că această interacțiune nu este blocată de browser. Există următoarele opțiuni:
 
-- Ensure that the service runs on the same origin as the web server which serves the QWC2 application.
-- Ensure that the service sends a `Access-Control-Allow-Origin` header with matching origin with each response.
-- For development purposes, use a browser plugin which adds the CORS headers, i.e. [CORS Everywhere](https://addons.mozilla.org/en-US/firefox/addon/cors-everywhere/).
+- Asigurați-vă că serviciul rulează pe aceeași origine ca și serverul web care deservește aplicația QWC2.
+- Asigurați-vă că serviciul trimite un header `Access-Control-Allow-Origin` cu originea care se potrivește cu fiecare răspuns.
+- În scopuri de dezvoltare, utilizați un plugin de browser care adaugă header-ele CORS, spre exemplu. [CORS peste tot](https://addons.mozilla.org/en-US/firefox/addon/cors-everywhere/).
 
-### Filenames of print and raster and DXF export
-The QGIS server response for the print, raster and DXF export requests does by default not contain any `Content-Disposition` header, meaning that browsers will attempt to guess a filename, which typically is the last part of the URL, without any extension.
+### Nume de fișiere de imprimare, raster și export DXF
+Răspunsul serverului QGIS pentru cererile de imprimare, raster și export DXF nu conține în mod implicit nici un header`Content-Disposition`, ceea ce înseamnă că browserele vor încerca să ghicească un nume de fișier, care este de obicei ultima parte a adresei URL, fără nicio extensie.
 
-To ensure browsers use a proper filename, configure the web server running QGIS Server to add a suitable `Content-Disposition` header to the response. In the case of Apache, the rule for the print output might look as follows:
+Pentru a vă asigura că browserele utilizează un nume de fișier adecvat, configurați serverul web care rulează QGIS Server pentru a adăuga un nume adecvat header-ului `Content-Disposition` pentru a răspunde. În cazul Apache, regula pentru ieșirea de imprimare ar putea arăta în felul următor:
 
     SetEnvIf Request_URI "^/wms.*/(.+)$" project_name=$1
     Header always setifempty Content-Disposition "attachment; filename=%{project_name}e.pdf" "expr=%{CONTENT_TYPE} = 'application/pdf'"
 
-This rule will use the last part of the URL as basename and add the `.pdf` extension, and will also ensure that the content-type is set to `application/pdf`. Note that this example uses the `setenvif` and `headers` apache modules.
+Această regulă va folosi ultima parte a adresei URL ca nume de bază și va adăuga extensia `.pdf`, și se va asigura, de asemenea, că tipul de conținut este setat la `application/pdf`. Rețineți că acest exemplu folosește `setenvif` și `headers` module specifice apache.
 
-## <a name="url-parameters"></a>URL parameters
-The following parameters can appear in the URL of the QWC2 application:
+## <a id="url-parameters"></a>Parametri URL
+Următorii parametri pot apărea în adresa URL a aplicației QWC2:
 
-- `t`: The active theme
-- `l`: The layers in the map, see below.
-- `bl`: The visible background layer
-- `st`: The search text
-- `sp`: Applied search provider when using `st` Parameter
-- `e`: The visible extent
-- `c`: The center of the visible extent
-- `s`: The current scale
-- `crs`: The CRS of extent/center coordinates
-- `hc`: If `c` is specified and `hc` is `true` or `1`, a marker is set at `c` when starting the application. Note: requires the `StartupMarkerPlugin` plugin to be active.
+- `t`: Tema activă
+- `l`: Straturile din hartă, vezi mai jos
+- `bl`: Stratul de fundal vizibil
+- `st`: Textul de căutare
+- `sp`: Furnizor de căutare când se utilizează parametrul `st`
+- `e`: Întinderea vizibilă
+- `c`: Centrul întinderii vizibile
+- `s`: Scara actuală
+- `crs`: CRS-ul coordonatelor de întindere/ centru
+- `hc`: Daca `c` este specificat și `hc` este `true` sau `1`, un marcator este setat cu `c` la pornirea aplicației. Mențiune: necesită plugin-ul `StartupMarkerPlugin` să fie activat.
 
-The `l` parameter lists all layers in the map (redlining and background layers) as a comma separated list of entries of the form
+Parametrul `l` listează toate straturile din hartă (sublinieri și de fundal) ca o listă CSV de date de intrare ale formularului:
 
     <layername>[<transparency>]!
 
-where
-- `layername` is the WMS name of a theme layer or group, or a string of the format
+unde
+- `layername` este numele WMS al unui strat sau al unui grup de temă sau al unui șir al formatului
 
       <wms|wfs>:<service_url>#<layername>
-   for external layers, i.e. `wms:https://wms.geo.admin.ch/?#ch.are.bauzonen`.
-- `<transparency>` denotes the layer transparency, betwen 0 and 100. If the `[<transparency>]` portion is omitted, the layer is fully opaque.
-- `!` denotes that the layer is invisible. If omitted, the layer is visible. If the layer is visible in an invisible parent group, `~` is used.
+   pentru straturi externe, de ex. `wms:https://wms.geo.admin.ch/?#ch.are.bauzonen`.
+- `<transparency>` indică transparența stratului, între 0 și 100. Daca partea cu `[<transparency>]` este omisă, stratul devine opac în intregime.
+- `!` indică faptul că stratul este invizibil. Dacă este omis, stratul este vizibil. Dacă stratul este vizibil într-un grup părinte invizibil, `~` este utilizat.
 
-*Note*: If group name is specified instead of the layer name, QWC2 will automatically resolve this to all layer names contained in that group, and will apply transparency and visibility settings as specified for the group.
+*Mențiune*: Dacă numele grupului este specificat în loc de numele stratului, QWC2 va rezolva automat acest lucru pentru toate numele straturilor conținute în acel grup, și va aplica setările de transparență și vizibilitate așa cum sunt specificate pentru grup.
 
-The `urlPositionFormat` parameter in `config.json` determines whether the extent or the center and scale appears in the URL.
+Parametrul `urlPositionFormat` din `config.json` determină dacă în URL apare întinderea sau centrul și scara.
 
-The `urlPositionCrs` parameter in `config.json` determines the projection to use for the extent resp. center coordinates in the URL. By default the map projection of the current theme is used. If `urlPositionCrs` is equal to the map projection, the `crs` parameter is omitted in the URL.
+Parametrul `urlPositionCrs` din `config.json` determină proiecția de utilizat pentru măsura respectiv coordonatele centrului în URL. În mod implicit, este utilizată proiecția hărții temei curente. Dacă `urlPositionCrs` este egală cu proiecția hărții, parametrul `crs` este omis în adresa URL.
 
-If the search text passed via `st` results in a unique result, the viewer automatically zooms to this result on startup. If the search result does not provide a bounding box, the `minScaleDenom` defined in the `searchOptions` of the `TopBar` configuration in `config.json` is used.
+Dacă textul de căutare a trecut prin `st` rezultă într-un rezultat unic, vizualizatorul zoom-ează automat la acest rezultat la pornire. Dacă rezultatul căutării nu oferă o fereastră de delimitare, atunci `minScaleDenom` definit în `searchOptions` din `TopBar` configurat în `config.json` este utilizat.
 
-## Startup position
-By default, the viewer opens zooming on the respective theme extent, as defined in `themes.json` (and overrideable in `themesConfig.json`).
+## Starea inițială
+În mod implicit, vizualizatorul se deschide mărind dimensiunea temei respective, așa cum este definit în `themes.json` (și cu posibilitatea de suprascriere în `themesConfig.json`).
 
-Alternatively, the following three options exist to influence the startup position:
+Alternativ, există următoarele trei opțiuni pentru a influența starea inițială:
 
-- Pass appropriate `c`, `s` or `e` URL parameters, as documented in [URL parameters](#url-parameters).
-- Pass a search text which results in a unique result (i.e. a coordinate string) as URL parameter, as documented in [URL parameters](#url-parameters).
-- Set `startupMode` in the `LocateSupport` options of the `Map` configuration in `config.json`. Possible values are `DISABLED`, `ENABLED` or `FOLLOWING`. If a search text is passed via `st` URL parameter or `hc=1` is specified in the URL, the `startupMode` is ignored.
+- Setați parametrii URL `c`, `s` sau `e` , așa cum este documentat în [parametri URL](#url-parameters).
+- Transmite un text de căutare care are ca rezultat un rezultat unic(spre exemplu o coordonată) ca parametru URL, așa cum este documentat în [parametri URL](#url-parameters).
+- Setați `startupMode` din `LocateSupport` opțiune aflată în `Map` configurând `config.json`. Valorile posibile sunt `DISABLED`, `ENABLED` sau `FOLLOWING`. Dacă un text de căutare este transmis prin parametrul URL`st` sau  `hc=1` este specificat în URL, `startupMode` este ignorat.
 
-## <a name="layer-catalogs"></a>Layer catalogs
-The import layer functionality in the layertree also supports loading a layer catalog document from an URL. Two catalog formats are supported:
+## <a id="layer-catalogs"></a>Cataloage de straturi
+Funcționalitatea de import a stratului din arborele de straturi acceptă și încărcarea unui document de catalog de straturi dintr-o adresă URL. Sunt acceptate două formate de catalog:
 
-* QGIS WMS/WFS connections XML: this file is produced by exporting the configured WMS or WFS connections from the QGIS data source manager dialog.
-* JSON: a document with contents
+* QGIS WMS/WFS conexiuni XML: acest fișier este creat prin exportarea conexiunilor WMS sau WFS configurate din fereastra QGIS Manager Data Source.
+* JSON: un document cu conținut
 
       {
         "catalog": [
@@ -625,31 +623,31 @@ The import layer functionality in the layertree also supports loading a layer ca
         ]
       }
 
-  where `resource` is in the same format as the serialized layer identifiers in a QWC2 URL, see [URL Parameters](#url-parameters).
+  unde `resource` este în același format ca identificatorii de strat stabilit într-un URL QWC2, vezi [parametri URL](#url-parameters).
 
-Note that the server serving the catalog documents needs to ensure that it sets CORS headers appropriately, if they are served from a different origin than QWC2.
+Rețineți că serverul care deservește documentele de catalog trebuie să se asigure că setează head-urile CORS în mod corespunzător, dacă acestea sunt trimise dintr-o altă origine decât QWC2.
 
-## Links in identify results
+## Link-uri în identificarea rezultatelor
 
-Links in attributes of GetFeatureInfo reponses are parsed and displayed as clickable links in the identify results window. You can also have links open in an inline dialog using the following format:
+Link-urile din atributele răspunsurilor GetFeatureInfo sunt analizate și afișate ca link-uri pe care se poate face click în fereastra de identificare a rezultatelor. De asemenea, puteți avea linkuri deschise într-un dialog inline folosind următorul format:
 
     <a href="<url>" target=":iframedialog:<name>:<option1=value1>:<option2=value2>:...">Text</a>
 
-Where:
+Unde:
 
-* `name` The name of the dialog. All links with the same name will open in the same dialog (resp. re-use an already visible dialog). Note that the title of the window will be the translation message ID `windows.<name>`, which should be added to `extra_strings` in `tsconfig.json` and translated in the respective language files.
-* Supported options include:
-  - `width=<integer>`: Initial window width
-  - `height=<integer>`: Initial window height
-  - `print=<boolean>`: Whether to display a print icon in the window title bar
-  - `dockable=<boolean>`: Whether the window is dockable
-  - `docked=<boolean>`: Whether the window is initially docked
+* `name` Denumierea ferestrei de dialog. Toate linkurile cu același nume se vor deschide în aceași fereastră de dialog (respectiv, reutilizați o fereastră de dialog deja vizibilă). Rețineți că titlul ferestrei va fi ID-ul mesajului de traducere `windows.<name>`, care ar trebui adăugat `extra_strings` în `tsconfig.json` și tradus în fișierele de limbă respective.
+* Opțiunile acceptate includ:
+  - `width=<integer>`: Lățimea inițială a ferestrei
+  - `height=<integer>`: Înălțimea inițială a ferestrei
+  - `print=<boolean>`: Dacă se afișează o pictogramă de tipărire în bara de titlu a ferestrei
+  - `dockable=<boolean>`: Dacă fereastra este andoacabilă
+  - `docked=<boolean>`: Dacă fereastra este inițial andocată
 
 
-## Keeping the QWC2 application up to date
-As mentioned in the [quick start](#quick-start) chapter, QWC2 is split into a common components repository and an application specific repository. The goal of this approach is to cleanly separate user-specific configuration and components which common components which serve as a basis for all QWC2 applications, and to make it as easy as possible to rebase the application onto the latest common QWC2 components.
+## Menținerea aplicației QWC2 la zi
+După cum se menționează în capitolul de [inițializare](#quick-start), QWC2 este împărțit într-un depozit comun de componente și un depozit specific aplicației. Scopul acestei abordări este de a separa în mod curat configurația specifică utilizatorului și componentele care componente comune care servesc drept bază pentru toate aplicațiile QWC2, și pentru a face cât mai ușor posibil rebazarea aplicației pe cele mai recente componente QWC2 comune.
 
-The recommended workflow is to keep the `qwc2` folder a submodule referencing the [upstream qwc2 repository](https://github.com/qgis/qwc2). To update it, just checkout the latest master (or a specific commit if desired):
+Fluxul de lucru recomandat este păstrarea folder-ului `qwc2` un submodul de referință pentru [upstream qwc2 repository](https://github.com/qgis/qwc2). Pentru a-l actualiza, verificați cel mai recent master (sau un anumit commit dacă doriți):
 
     cd qwc2
     git checkout master
@@ -657,31 +655,31 @@ The recommended workflow is to keep the `qwc2` folder a submodule referencing th
     cd ..
     yarn install
 
-It is good practice to run `yarn install` after pulling the submodule to ensure all the correct dependencies are installed.
+Este o practică bună să utilizezi `yarn install` după ce descărcați submodulul pentru a vă asigura că sunt instalate toate dependențele corecte.
 
-The [upgrade notes](https://github.com/qgis/qwc2-demo-app/blob/master/UpgradeNotes.md) documents major changes, and in particular all incompatible changes between releases which require changes to the application specific code and/or configuration.
+[Mențiuni de upgrade](https://github.com/qgis/qwc2-demo-app/blob/master/UpgradeNotes.md) care documentează modificările majore și, în special, toate modificările incompatibile dintre versiuni care necesită modificări ale codului și/sau configurației specifice aplicației.
 
-## API for external applications
-The API plugin binds many application actions to the `window.qwc2` object and makes them accessible for external applications. Currently, the following methods are available:
+## API pentru aplicații externe
+Pluginul API leagă multe acțiuni ale aplicației la `window.qwc2` și le face accesibile pentru aplicații externe. În prezent, sunt disponibile următoarele metode:
 
-- All [display](https://github.com/qgis/qwc2/blob/master/actions/display.js) actions
-- All [layers](https://github.com/qgis/qwc2/blob/master/actions/layers.js) actions
-- All [locate](https://github.com/qgis/qwc2/blob/master/actions/locate.js) actions
-- All [map](https://github.com/qgis/qwc2/blob/master/actions/map.js) actions
-- All [task](https://github.com/qgis/qwc2/blob/master/actions/task.js) actions
-- All [theme](https://github.com/qgis/qwc2/blob/master/actions/theme.js) actions
-- All [windows](https://github.com/qgis/qwc2/blob/master/actions/windows.js) actions
-- Additional API calls:
+- Toate acțiunile de [afișăre](https://github.com/qgis/qwc2/blob/master/actions/display.js)
+- Toate acțiunile [straturilor](https://github.com/qgis/qwc2/blob/master/actions/layers.js)
+- Toate acțiunile de [localizare](https://github.com/qgis/qwc2/blob/master/actions/locate.js)
+- Toate acțiunile [hărții](https://github.com/qgis/qwc2/blob/master/actions/map.js)
+- Toate acțiunile legate de [sarcini](https://github.com/qgis/qwc2/blob/master/actions/task.js)
+- Toate acțiunile legate de [teme](https://github.com/qgis/qwc2/blob/master/actions/theme.js)
+- Toate acțiunile legate de [ferestre](https://github.com/qgis/qwc2/blob/master/actions/windows.js)
+- Apelurări de tip API suplimentare:
   - `window.qwc2.addExternalLayer(resource, beforeLayerName=null)`
   - `window.qwc2.drawScratch(geomType, message, drawMultiple, callback, style = null)`
 
-See the docstrings in [API.js](https://github.com/qgis/qwc2/blob/master/plugins/API.jsx) as well as the actions functions linked above for more information.
+Vedeți documentele din [API.js](https://github.com/qgis/qwc2/blob/master/plugins/API.jsx) precum și funcțiile de acțiuni notate mai sus pentru mai multe informații.
 
-See [api_examples.js](https://github.com/qgis/qwc2-demo-app/blob/master/api_examples.js) for some concrete examples.
+Vedeți [api_examples.js](https://github.com/qgis/qwc2-demo-app/blob/master/api_examples.js) pentru câteva exemple concrete.
 
 
-## Developing
-QWC2 is written in JavaScript using in particular the ReactJS, Redux and OpenLayers libraries. The following links point to some useful resources to learn the basics:
+## Dezvoltare
+QWC2 este scris în JavaScript folosind în special bibliotecile ReactJS, Redux și OpenLayers. Următoarele link-uri indică câteva resurse utile pentru a învăța elementele de bază:
 
 **ECMAScript 2015**
 - https://babeljs.io/docs/learn-es2015/
@@ -699,4 +697,4 @@ QWC2 is written in JavaScript using in particular the ReactJS, Redux and OpenLay
 - https://egghead.io/courses/getting-started-with-redux
 - https://egghead.io/courses/building-react-applications-with-idiomatic-redux
 
-When developing, it is useful to add `debug=true` to the URL query parameters, which will enable logging of all application state changes to the browser console.
+În timpul dezvoltării, este util să folosiți `debug=true` la parametrii de interogare URL, care va permite înregistrarea tuturor modificărilor stării aplicației în consola browserului.
