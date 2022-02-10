@@ -24,7 +24,7 @@ QWC2 este împărțit în două părți:
 
 Pentru a lucra cu QWC2, veți avea nevoie de un mediu de dezvoltare format minim din [git](https://git-scm.com/), [node](https://nodejs.org/) și [yarn 1.x](https://classic.yarnpkg.com).
 
-Cea mai rapidă modalitate de a începe este clonarea recursivă a aplicației demo de aici:
+Cea mai rapidă modalitate de a copia aplicația demo este aici:
 
     $ git clone --recursive https://github.com/qgis/qwc2-demo-app.git
 
@@ -37,7 +37,7 @@ Apoi, porniți o aplicație de dezvoltare locală:
 
     $ yarn start
 
-Aplicația de dezvoltare va rula implicit pe `http://localhost:8081`. Mențiune: dacă vă aflați în spatele unui server proxy, va trebui să [specificați setările acelui proxy](#themes-json).
+Aplicația de dezvoltare va rula implicit pe `http://localhost:8081`. De reținut: dacă vă aflați în spatele unui server proxy, va trebui să [specificați setările acelui proxy](#themes-json).
 
 În acest moment, puteți personaliza și configura aplicația în funcție de nevoile dvs., așa cum este descris în detaliu în capitolele următoare.
 
@@ -397,7 +397,7 @@ Formatul definițiilor stratului de fundal este următorul:
 | `"group":  "<GroupId>",`     | Opțional, un șir de ID de grup. Straturile de fundal cu același ID de grup vor fi grupate împreună în background switcher. |
 | `"minScale": <min_scale>,`   | Opțional, numitorul de scară minimă de la care se redă stratul.               |
 | `"maxScale": <max_scale>,`   | Opțional, numitorul de scară maximă de la care să reda stratul.               |
-| `<Layer params>`             | Parametri în funcție de tipul de strat specificat. Consultați [sample `themesConfig.json`](https://github.com/qgis/qwc2-demo-app/blob/master/themesConfig.json) pentru cateva exemple. |
+| `<Layer params>`             | Parametri în funcție de tipul de strat specificat. Consultați [`themesConfig.json`](https://github.com/qgis/qwc2-demo-app/blob/master/themesConfig.json) pentru cateva exemple. |
 
 *Mențiune*: Puteți utiliza scriptul python de ajutor localizat la `qwc2/scripts/wmts_config_generator.py` pentru a genera cu ușurință configurații ale stratului de fundal WMTS.
 
@@ -552,10 +552,10 @@ Pentru fiecare serviciu cu care interacționează QWC2, în special cu serverul 
 
 - Asigurați-vă că serviciul rulează pe aceeași origine ca și serverul web care deservește aplicația QWC2.
 - Asigurați-vă că serviciul trimite un header `Access-Control-Allow-Origin` cu originea care se potrivește cu fiecare răspuns.
-- În scopuri de dezvoltare, utilizați un plugin de browser care adaugă header-ele CORS, spre exemplu. [CORS peste tot](https://addons.mozilla.org/en-US/firefox/addon/cors-everywhere/).
+- În scopuri de dezvoltare, utilizați un plugin de browser care adaugă header-ele CORS, spre exemplu [CORS Everywhere](https://addons.mozilla.org/en-US/firefox/addon/cors-everywhere/).
 
 ### Nume de fișiere de imprimare, raster și export DXF
-Răspunsul serverului QGIS pentru cererile de imprimare, raster și export DXF nu conține în mod implicit nici un header`Content-Disposition`, ceea ce înseamnă că browserele vor încerca să ghicească un nume de fișier, care este de obicei ultima parte a adresei URL, fără nicio extensie.
+Răspunsul serverului QGIS pentru cererile de imprimare, raster și export DXF nu conține în mod implicit nici un header `Content-Disposition`, ceea ce înseamnă că browserele vor încerca să ghicească un nume de fișier, care este de obicei ultima parte a adresei URL, fără nicio extensie.
 
 Pentru a vă asigura că browserele utilizează un nume de fișier adecvat, configurați serverul web care rulează QGIS Server pentru a adăuga un nume adecvat header-ului `Content-Disposition` pentru a răspunde. În cazul Apache, regula pentru ieșirea de imprimare ar putea arăta în felul următor:
 
