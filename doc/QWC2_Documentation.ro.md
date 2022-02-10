@@ -1,83 +1,83 @@
-# QGIS Web Client 2 Documentation
+# QGIS Web Client 2 Documentație
 
-## Introduction
+## Introducere
 
-QGIS Web Client 2 (QWC2) is a modular next generation responsive web client for QGIS Server, built with ReactJS and OpenLayers.
+QGIS Web Client 2 (QWC2) este un client web modular de ultimă generație pentru QGIS Server, creat cu ReactJS și OpenLayers.
 
-It is released under the terms of the [BSD license](https://github.com/qgis/qwc2-demo-app/blob/master/LICENSE).
+Este lansat sub termenii și condițiile [Licenței BSD](https://github.com/qgis/qwc2-demo-app/blob/master/LICENSE).
 
-## Requirements
+## Cerințe
 
-As a minimum, a working QGIS server environment is required. Projects which are to be offered as QWC2 topics must be published as WMS.
+Minimul necesar este reprezentat de un mediu pentru serverul de QGIS. Proiectele care urmează să fie oferite drept QWC2 trebuie publicate ca WMS.
 
-Furthermore, a web server is required which will serve the QWC2 application.
+În plus, este necesar și un server web care va servi aplicația QWC2.
 
 
-## <a name="quick-start"></a>Quick start
+## <a name="quick-start"></a>Inițializare
 
-QWC2 is divided into two repositories:
+QWC2 este împărțit în două părți:
 
-- The QWC2 components, hosted at [https://github.com/qgis/qwc2/](https://github.com/qgis/qwc2/). This repository contains the core building blocks common to all QWC2 applications.
-- The QWC2 application, an example is hosted at [https://github.com/qgis/qwc2-demo-app](https://github.com/qgis/qwc2-demo-app). This repository contains the user-specific configuration of the core components and can also include any other custom components.
+- Componentele QWC2, încarcate aici [https://github.com/qgis/qwc2/](https://github.com/qgis/qwc2/). Aici se găsesc elementele de bază comune tuturor aplicațiilor QWC2.
+- Un demo al aplicației QWC2, este încărcat aici [https://github.com/qgis/qwc2-demo-app](https://github.com/qgis/qwc2-demo-app). Aici se află configurația specifică utilizatorului a componentelor de bază și poate include, de asemenea, orice alte componente personalizate.
 
-Additionally, some QWC2 components (such as permalink generation, elevation queries, editing, etc) require external services. The reference implementation of these services are hosted at [https://github.com/qwc-services/](https://github.com/qwc-services/).
+În plus, câteva componente din QWC2 (cum ar fi generarea link-urilor permanente, interogarea cotelor, editarea, etc) necesită servicii externe. Implementarea de referință ale acestor servicii se regăsește aici [https://github.com/qwc-services/](https://github.com/qwc-services/).
 
-To work with QWC2, you will need a minimal development environment consisting of [git](https://git-scm.com/), [node](https://nodejs.org/) and [yarn 1.x](https://classic.yarnpkg.com).
+Pentru a lucra cu QWC2, veți avea nevoie de un mediu de dezvoltare format minim din [git](https://git-scm.com/), [node](https://nodejs.org/) și [yarn 1.x](https://classic.yarnpkg.com).
 
-The fastest way to get started is by recursively cloning the demo application repository:
+Cea mai rapidă modalitate de a începe este clonarea recursivă a aplicației demo de aici:
 
     $ git clone --recursive https://github.com/qgis/qwc2-demo-app.git
 
-Next, install all required dependencies:
+Următorul pas este să instalați toate dependențele necesare:
 
     $ cd qwc2-demo-app
     $ yarn install
 
-Then, start a local development application:
+Apoi, porniți o aplicație de dezvoltare locală:
 
     $ yarn start
 
-The development application will run by default on `http://localhost:8081`. Note: if you are behind a proxy server, you'll need to [specify the proxy settings](#themes-json).
+Aplicația de dezvoltare va rula implicit pe `http://localhost:8081`. Mențiune: dacă vă aflați în spatele unui server proxy, va trebui să [specificați setările acelui proxy](#themes-json).
 
-At this point, you can customize and configure the application according to your needs, as described in detail in the following chapters.
+În acest moment, puteți personaliza și configura aplicația în funcție de nevoile dvs., așa cum este descris în detaliu în capitolele următoare.
 
-The final step is to compile a deployable application bundle for production:
+Pasul final este să compilați un pachet de aplicații implementabile pentru producție:
 
     $ yarn run prod
 
-You can then deploy the contents of the `prod` folder to your web server root.
+Puteți implementa conținutul fișierului `prod` la root-ul serverului dvs. web.
 
-*Note*: On some Linux distributions, `yarn` may refer to the tool of the `cmdtest` software package, not the Yarn package manager. The latter might instead be called `yarnpkg`.
+*Mențiune*: Pe unele distribuții Linux, `yarn` se poate referi la instrumentul pachetului software `cmdtest`, nu la managerul de pachete Yarn. Acesta din urmă ar putea fi numit în schimb `yarnpkg`.
 
 
-## QWC2 configuration
+## Configurație QWC2
 
-The layout of the development tree is as follows:
+Schema de dezvoltare se prezintă în felul următor:
 
-| Path                         | Description
-|------------------------------|-------------------------------------------------------------------|
-|`├─ static/`                  |                                                                   |
-|`│  ├─ assets/`               |                                                                   |
-|`│  │  ├─ css/qwc2.css`       | Master style sheet                                                |
-|`│  │  ├─ img/`               | Application logo                                                  |
-|`│  │  │  └─ mapthumbs/`      | Map thumbnails, typically autogenerated                           |
-|`│  │  └─ templates/`         |                                                                   |
-|`│  │     └─ legendprint.html`| HTML template for the legend print                                |
-|`│  ├─ translations/`         | Translation files                                                 |
-|`│  ├─ config.json`           | Master configuration file                                         |
-|`│  └─ themes.json`           | Full theme configuration, autogenerated from `themesConfig.json`  |
-|`├─ js/`                      |                                                                   |
-|`│  ├─ app.jsx`               | Entry point of the ReactJS application                            |
-|`│  ├─ appConfig.js`          | Configuration of the qwc2 core modules                            |
-|`│  ├─ Help.jsx`              | Component for rendering a user-defined Help dialog                |
-|`│  └─ SearchProviders.js`    | Search providers                                                  |
-|`├─ icons/`                   | Application icons                                                 |
-|`├─ qwc2/`                    | Git submodule containing the core qwc2 components                 |
-|`├─ index.html`               | Entry point                                                       |
-|`├─ package.json`             | NodeJS configuration file                                         |
-|`├─ styleConfig.json`         | Configuration of some application-wide styles                     |
-|`├─ themesConfig.json`        | Themes configuration                                              |
-|`└─ webpack.config.js`        | Webpack configuration                                             |
+| Cale                         | Descriere
+|------------------------------|--------------------------------------------------------------------------|
+|`├─ static/`                  |                                                                          |
+|`│  ├─ assets/`               |                                                                          |
+|`│  │  ├─ css/qwc2.css`       | Documentul de stilizare principal                                        |
+|`│  │  ├─ img/`               | Sigla aplicației                                                         |
+|`│  │  │  └─ mapthumbs/`      | Miniaturile hărții, deobicei generate automat                            |
+|`│  │  └─ templates/`         |                                                                          |
+|`│  │     └─ legendprint.html`| Șablon HTML pentru imprimarea legendei                                   |
+|`│  ├─ translations/`         | Fișiere de traducere                                                     |
+|`│  ├─ config.json`           | Fișierul de configurare principal                                        |
+|`│  └─ themes.json`           | Configurație completă a temei, generată automat din `themesConfig.json`  |
+|`├─ js/`                      |                                                                          |
+|`│  ├─ app.jsx`               | Entry point of the ReactJS application                                   |
+|`│  ├─ appConfig.js`          | Configuration of the qwc2 core modules                                   |
+|`│  ├─ Help.jsx`              | Component for rendering a user-defined Help dialog                       |
+|`│  └─ SearchProviders.js`    | Search providers                                                         |
+|`├─ icons/`                   | Application icons                                                        |
+|`├─ qwc2/`                    | Git submodule containing the core qwc2 components                        |
+|`├─ index.html`               | Entry point                                                              |
+|`├─ package.json`             | NodeJS configuration file                                                |
+|`├─ styleConfig.json`         | Configuration of some application-wide styles                            |
+|`├─ themesConfig.json`        | Themes configuration                                                     |
+|`└─ webpack.config.js`        | Webpack configuration                                                    |
 
 These files are described in detail in the following sections, in order of importance.
 
