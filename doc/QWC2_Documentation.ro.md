@@ -4,7 +4,7 @@
 
 QGIS Web Client 2 (QWC2) este un client web modular de ultimă generație pentru QGIS Server, creat cu ReactJS și OpenLayers.
 
-Este lansat sub termenii și condițiile [Licenței BSD](https://github.com/qgis/qwc2-demo-app/blob/master/LICENSE).
+Este lansat sub termenii și condițiile [licenței BSD](https://github.com/qgis/qwc2-demo-app/blob/master/LICENSE).
 
 ## Cerințe
 
@@ -20,7 +20,7 @@ QWC2 este împărțit în două părți:
 - Componentele QWC2, încarcate aici [https://github.com/qgis/qwc2/](https://github.com/qgis/qwc2/). Aici se găsesc elementele de bază comune tuturor aplicațiilor QWC2.
 - Un demo al aplicației QWC2, este încărcat aici [https://github.com/qgis/qwc2-demo-app](https://github.com/qgis/qwc2-demo-app). Aici se află configurația specifică utilizatorului a componentelor de bază și poate include, de asemenea, orice alte componente personalizate.
 
-În plus, câteva componente din QWC2 (cum ar fi generarea link-urilor permanente, interogarea cotelor, editarea, etc) necesită servicii externe. Implementarea de referință ale acestor servicii se regăsește aici [https://github.com/qwc-services/](https://github.com/qwc-services/).
+În plus, câteva componente din QWC2 (cum ar fi generarea permalink-urilor, interogarea cotelor, editarea, etc) necesită servicii externe. Implementarea de referință ale acestor servicii se regăsește aici [https://github.com/qwc-services/](https://github.com/qwc-services/).
 
 Pentru a lucra cu QWC2, veți avea nevoie de un mediu de dezvoltare format minim din [git](https://git-scm.com/), [node](https://nodejs.org/) și [yarn 1.x](https://classic.yarnpkg.com).
 
@@ -58,7 +58,7 @@ Schema de dezvoltare se prezintă în felul următor:
 |------------------------------|--------------------------------------------------------------------------|
 |`├─ static/`                  |                                                                          |
 |`│  ├─ assets/`               |                                                                          |
-|`│  │  ├─ css/qwc2.css`       | Documentul de stilizare principal                                        |
+|`│  │  ├─ css/qwc2.css`       | Documentul principal de stilizare                                        |
 |`│  │  ├─ img/`               | Sigla aplicației                                                         |
 |`│  │  │  └─ mapthumbs/`      | Miniaturile hărții, deobicei generate automat                            |
 |`│  │  └─ templates/`         |                                                                          |
@@ -67,91 +67,91 @@ Schema de dezvoltare se prezintă în felul următor:
 |`│  ├─ config.json`           | Fișierul de configurare principal                                        |
 |`│  └─ themes.json`           | Configurație completă a temei, generată automat din `themesConfig.json`  |
 |`├─ js/`                      |                                                                          |
-|`│  ├─ app.jsx`               | Entry point of the ReactJS application                                   |
-|`│  ├─ appConfig.js`          | Configuration of the qwc2 core modules                                   |
-|`│  ├─ Help.jsx`              | Component for rendering a user-defined Help dialog                       |
-|`│  └─ SearchProviders.js`    | Search providers                                                         |
-|`├─ icons/`                   | Application icons                                                        |
-|`├─ qwc2/`                    | Git submodule containing the core qwc2 components                        |
-|`├─ index.html`               | Entry point                                                              |
-|`├─ package.json`             | NodeJS configuration file                                                |
-|`├─ styleConfig.json`         | Configuration of some application-wide styles                            |
-|`├─ themesConfig.json`        | Themes configuration                                                     |
-|`└─ webpack.config.js`        | Webpack configuration                                                    |
+|`│  ├─ app.jsx`               | Punctul de intrare al aplicației ReactJS                                 |
+|`│  ├─ appConfig.js`          | Configurarea modulelor de bază qwc2                                      |
+|`│  ├─ Help.jsx`              | Componentă pentru redarea unui dialog de ajutor definit de utilizator    |
+|`│  └─ SearchProviders.js`    | Furnizori de căutare                                                     |
+|`├─ icons/`                   | Pictogramele aplicației                                                  |
+|`├─ qwc2/`                    | Submodulul Git care conține componentele de bază qwc2                    |
+|`├─ index.html`               | Punct de intrare                                                         |
+|`├─ package.json`             | Fișierul de configurare NodeJS                                           |
+|`├─ styleConfig.json`         | Configurarea unor stilizări la nivelul aplicației                        |
+|`├─ themesConfig.json`        | Configurarea temelor                                                     |
+|`└─ webpack.config.js`        | Configurarea pachetului web                                              |
 
-These files are described in detail in the following sections, in order of importance.
+Aceste fișiere sunt descrise în detaliu în secțiunile următoare, după ordinea importanței.
 
-### Application configuration: the `config.json` and `js/appConfig.js` files
+### Configurarea aplicației: `config.json` și `js/appConfig.js`
 
-The central aspect to keep in mind is that a QWC2 application consists of a collection of plugins, which can be individually enabled and configured, in particular separately for desktop and mobile mode. Together, the `config.json` and `js/appConfig.js` files control these plugins, along with a number of other global settings.
+Principalul aspect de reținut este că o aplicație QWC2 constă dintr-o colecție de pluginuri, care pot fi activate și configurate individual, în special separat pentru desktop și mobil. Împreună fișierele, `config.json` și `js/appConfig.js` controlează aceste pluginuri, împreună cu o serie de alte setări globale.
 
-The `js/appConfig.js` is the build-time configuation file, and defines:
-- The default application locale, built into the application. This locale is used if no available locale matches the browser locale.
-- Which plugins are built into the application. Plugins left out here will be completely omitted when compiling the application bundle, and will hence also reduce the size of the bundle.
-- Various hook functions, as documented in the sample [sample `js/appConfig.js`](https://github.com/qgis/qwc2-demo-app/blob/master/js/appConfig.js).
+Fișierul `js/appConfig.js` este fișierul care configurează build-ul și definește:
+- Localizarea implicită a aplicației, încorporată în aplicație. Această localizare este utilizată dacă nicio altă localizare disponibilă nu corespunde localizării browserului.
+- Ce pluginuri sunt încorporate în aplicație. Pluginurile lăsate aici vor fi complet omise la compilarea pachetului de aplicații și, prin urmare, vor reduce și dimensiunea pachetului.
+- Diverse funcții tip cârlig, așa cum este documentat în exmeplu [exemplu `js/appConfig.js`](https://github.com/qgis/qwc2-demo-app/blob/master/js/appConfig.js).
 
-The `config.json` file is the run-time configuration file. It contains the following settings:
+Fișierul `config.json` este fișierul de configurare în timpul rulării. Conține următoarele setări:
 
-*URLs of external services*:
-Some external services can be used to enhance the application. The reference implementation of these services are hosted at [https://github.com/qwc-services/](https://github.com/qwc-services/). The following services can be configured:
+*URL-uri ale serviciilor externe*:
+Unele servicii externe pot fi folosite pentru a îmbunătăți aplicația. Implementarea de referință a acestor servicii se găsește aici [https://github.com/qwc-services/](https://github.com/qwc-services/). Următoarele servicii pot fi configurate:
 
-| Setting              | Description |
+| Setări               | Descriere   |
 |----------------------|-------------|
-|`permalinkServiceUrl` | Generates and resolves compact permalinks for the Share plugin. If empty, the full URL will be used. |
-|`elevationServiceUrl` | Returns elevation values, used to generate a height profile when measuring lines and display elevation information in the map right-click information bubble. If empty, the respective information will not be displayed in the client. |
-|`editServiceUrl`      | Service for editing features of layers served by QGIS Server. Required by the Editing plugin. |
-|`mapInfoService`      | Returns additional information to be displayed in the map right-click information bubble. If empty, no additional information will be displayed. |
-|`featureReportService`| Returns a custom document associated to a feature. See [`themesConfig.json`](#themesConfig-json). |
+|`permalinkServiceUrl` | Generează și rezolvă permalink-uri compacte pentru pluginul Share. Dacă este gol, va fi folosită adresa URL completă. |
+|`elevationServiceUrl` | Returnează valorile de altitudine, utilizate pentru a genera un profil de înălțime la măsurarea liniilor și pentru a afișa informații de altitudine în fereastra de informații folosind clic dreapta pe hartă. Dacă este gol, informațiile respective nu vor fi afișate în client. |
+|`editServiceUrl`      | Serviciu de editare a caracteristicilor straturilor deservite de QGIS Server. Solicitat de pluginul Editing. |
+|`mapInfoService`      | Returnează informații suplimentare pentru a fi afișate în fereastra de informații folosind click dreapta pe hartă. Dacă este gol, nu vor fi afișate informații suplimentare. |
+|`featureReportService`| Returnează un document personalizat asociat unei caracteristici. Vezi [`themesConfig.json`](#themesConfig-json). |
 
-*Global settings*:
+*Setări globale*:
 
-All settings are optional, with fallback to the default values as documented.
+Toate setările sunt opționale, cu revenirea la valorile implicite, așa cum este documentat.
 
-| Setting                             | Description |
+| Setări                              | Descriere   |
 |-------------------------------------|-------------|
-|`translationsPath`                   | Path from to the `translations` folder. Default value: `translations`.   |
-|`assetsPath`                         | Path from to the `assets` folder. Default value: `assets`.               |
-|`urlPositionFormat`                  | How to encode the current map extent in the URL, either `centerAndZoom` or `extent`. See [URL parameters](#url-parameters) for details. Default value: `extent`. |
-|`urlPositionCrs`                     | The CRS used to encode the current map extent coordinates in the URL. Default value: the map projection. |
-|`omitUrlParameterUpdates`            | Whether to omit updating the URL parameters. Default value: `false`.      |
-|`defaultFeatureStyle`                | The default style to use for selection geometries and other unstyled features. Default value: see `qwc2/utils/FeatureStyles.js`. |
-|`projections`                        | A list of map projections to register, in the format `{"code": "<code>", "proj": "<proj4def>", "label": "<label>"}`. By default, `EPSG:3857` and `EPSG:4326` are registered. |
-|`allowFractionalZoom`                | Whether to allow arbitrary scales for viewing the map. Default value: `false`.      |
-|`localeAwareNumbers`                 | Whether to use locale aware numbers throughout. Default value: `false`.             |
-|`wmsDpi`                             | The DPI to pass to the WMS requests. Default value: `96`.                           |
-|`wmsHidpi`                           | Whether to honour the device pixel ratio for WMS GetMap requests. Default value: `true`. |
-|`externalLayerFeatureInfoFormats`    | A dictionary of feature info formats for external layers, in the format `{"<url>": "<format>", ...}`. If the GetFeatureInfo URL of a layer contains the specified `<url>`, the corresponding format is used. |
-|`storeAllLayersInPermalink`          | Whether to store the full layertree in the permalink data, rather than only local (i.e. redlining) layers. If false, remote layers are re-queried from the respective services, if true, they are statically reloaded (meaning restored layers may be outdated compared to current service capabilities).
+|`translationsPath`                   | Calea către fișierul `translations`. Valoare implicită: `translations`.   |
+|`assetsPath`                         | Calea către fișierul `assets`. Valoare implicită: `assets`.               |
+|`urlPositionFormat`                  | Cum se codifică întinderea actuală a hărții în adresa URL, fie prin `centerAndZoom` sau `extent`. Vezi [URL parameters](#url-parameters) pentru detalii. Valoare implicită: `extent`. |
+|`urlPositionCrs`                     | CRS-ul folosit pentru a codifica coordonatele actuale ale extinderii hărții în adresa URL. Valoare implicită: proiecția hărții. |
+|`omitUrlParameterUpdates`            | Dacă omiteți actualizarea parametrilor URL. Valoare implicită: `false`.      |
+|`defaultFeatureStyle`                | Stilizarea implicit de utilizat pentru geometriile de selecție și alte caracteristici fără stil. Valoare implicită: vezi `qwc2/utils/FeatureStyles.js`. |
+|`projections`                        | O listă de proiecții hărți de înregistrat, în format `{"code": "<code>", "proj": "<proj4def>", "label": "<label>"}`. În mod implicit, `EPSG:3857` și `EPSG:4326` sunt înregistrate. |
+|`allowFractionalZoom`                | Dacă se permite folosirea arbitrară a scarilor pentru vizualizarea hărții. Valoare implicită: `false`.      |
+|`localeAwareNumbers`                 | Daca folosiți numere locale. Valoare implicită: `false`.             |
+|`wmsDpi`                             | DPI-ul transmis la cererile WMS-ului. Valoare implicită: `96`.                           |
+|`wmsHidpi`                           | Dacă să facă raportul de pixeli al dispozitivului pentru solicitările WMS GetMap. Valoare implicită: `true`. |
+|`externalLayerFeatureInfoFormats`    | Un dicționar de formate de informații despre caracteristici pentru straturi externe, în format `{"<url>": "<format>", ...}`. Dacă adresa URL GetFeatureInfo a unui strat conține conținutul specificat `<url>`, se utilizează formatul corespunzător. |
+|`storeAllLayersInPermalink`          | Ori stocați întregul arbore de straturi în datele permalink-ului, ori numai în straturile locale. Dacă este false, straturile la distanță sunt re-interogate de la serviciile respective, dacă sunt true, acestea sunt reîncărcate static (ceea ce înseamnă că straturile restaurate pot fi vechi în comparație cu capabilitățile serviciului actual). |
 
-*Global settings, overridable per theme*:<a name="config-json-overridable"></a>
+*Setări globale, suprascrise pentru fiecare temă*:<a name="config-json-overridable"></a>
 
-The following options can be specified globally, and also overriden per theme, see [`themesConfig.json`](#themesConfig-json).
-All settings are optional, with fallback to the default values as documented.
+Următoarele opțiuni pot fi specificate la nivel global și, de asemenea, suprascrise pe temă, vezi [`themesConfig.json`](#themesConfig-json).
+Toate setările sunt opționale, cu revenirea la valorile implicite, așa cum este documentat.
 
-| Setting                              | Description |
+| Setări                               | Descriere   |
 |--------------------------------------|-------------|
-|`preserveExtentOnThemeSwitch`         | Whether to preserve the current map extent when switching theme, if possible (see below). Default value: `false`. |
-|`preserveBackgroundOnThemeSwitch`     | Whether to preserve the current background layer when switching theme, if possible. Default value: `false`. |
-|`preserveNonThemeLayersOnThemeSwitch` | Whether to preserve non-theme layers when switching theme. Default value: `false`.  |
-|`allowReorderingLayers`               | Whether to allow re-ordering layers in the layer tree. Default value: `false`.      |
-|`flattenLayerTreeGroups`              | Whether to display a flat layer tree, omitting the groups. Default value: `false`.  |
-|`allowLayerTreeSeparators`            | Allows users to add separator items in a flat layer tree. Default value: `false`.   |
-|`preventSplittingGroupsWhenReordering`| Whether to prevent splitting sibling groups or the group itself when reordering items. Default value: `false`. |
-|`allowRemovingThemeLayers`            | Whether to allow removing any theme layers from the layer tree. Default value: `false`. |
-|`searchThemes`                        | Whether allow searching for themes from the global search field. Default value: `false`. |
-|`allowAddingOtherThemes`              | Whether to allow adding another theme to a currently loaded theme. Default value: `false`. |
-|`disableImportingLocalLayers`         | Whether to hide the option to import local layers from the layer tree. Default value: `false`. |
-|`importLayerUrlPresets`               | A list of predefined URLs from which the user can choose when importing layers from the layer tree. Entries must be strings or objects of the format `{"label": "<Label>", "value": "<URL>"}`. See also [Layer catalogs](#layer-catalogs). |
-|`identifyTool`                        | The name of the identify plugin to use. It is possible to have multiple identify tools, and i.e. on a per-theme basis select which one is active. Default value: `Identify`. |
-|`globallyDisableDockableDialogs`      | Whether to globally disable the dockable feature of popup dialogs. Default value: `false`. |
+|`preserveExtentOnThemeSwitch`         | Dacă este posibilă extinderea actuală a hărții odată cu schimbarea temei (vezi mai jos). Valoare implicită: `false`. |
+|`preserveBackgroundOnThemeSwitch`     | Dacă este posibilă păstrarea stratul de fundal curent odată cu schimbarea temei. Valoare implicită: `false`. |
+|`preserveNonThemeLayersOnThemeSwitch` | Dacă este posibilă păstrarea straturile fără temă atunci când schimbați tema. Valoare implicită: `false`.  |
+|`allowReorderingLayers`               | Dacă se permite reordonarea straturilor în arborele de straturi. Valoare implicită: `false`.      |
+|`flattenLayerTreeGroups`              | Dacă să afișați un arbore de strat simplu, omițând grupurile. Valoare implicită: `false`.  |
+|`allowLayerTreeSeparators`            | Permite utilizatorilor să adauge elemente de separare într-un arbore cu strat simplu. Valoare implicită: `false`.   |
+|`preventSplittingGroupsWhenReordering`| Dacă se permite separarea grupurilor de subgrupuri și ale grupurilor implicit atunci când se reordonează elementele. Valoare implicită: `false`. |
+|`allowRemovingThemeLayers`            | Dacă se permite eliminarea straturilor temă din arborele de straturi. Valoare implicită: `false`. |
+|`searchThemes`                        | Dacă se permite căutarea temelor din câmpul de căutare globală. Valoare implicită: `false`. |
+|`allowAddingOtherThemes`              | Dacă se permite adăugarea unei alte teme la o temă încărcată curent. Valoare implicită: `false`. |
+|`disableImportingLocalLayers`         | Dacă se permite să ascundeți opțiunea de a importa straturi locale din arborele de straturi. Valoare implicită: `false`. |
+|`importLayerUrlPresets`               | O listă de adrese URL predefinite din care utilizatorul poate alege atunci când importă straturi din arborele de straturi. Datele introduse trebuie să fie șiruri de caractere sau obiecte ale formatului `{"label": "<Label>", "value": "<URL>"}`. Vedeți de asemenea [Layer catalogs](#layer-catalogs). |
+|`identifyTool`                        | Numele pluginului de identificare petru a fi utilizat. Este posibil să aveți mai multe instrumente de identificare și, de exemplu, pe bază de temă, selectați care să fie activ. Valoare implicită: `Identify`. |
+|`globallyDisableDockableDialogs`      | Dacă trebuie să dezactivați global setarea de andocare a dialogurilor de tip pop-up. Valoare implicită: `false`. |
 
-*Notes*:
+*Mențiuni*:
 
-- The layer tree supports re-ordering layers via drag-and-drop if `allowReorderingLayers = true` *and either* `preventSplittingGroupsWhenReordering = true` *or* `flattenLayerTreeGroups = true`.
-- If `preserveExtentOnThemeSwitch = true`, the current extent is preserved if it is within the new theme extent and if the current theme map projection is equal to the new theme projection. If `preserveExtentOnThemeSwitch = "force"`, the current extent is preserved regardless of whether it is within the new theme extent, but the current and new theme map projections must still match.
+- Arborele de straturi acceptă reordonarea straturilor prin glisare și plasare dacă `allowReorderingLayers = true` *și `preventSplittingGroupsWhenReordering = true` *sau* `flattenLayerTreeGroups = true`.
+- Dacă `preserveExtentOnThemeSwitch = true`, și extinderea actuală este păstrată dacă se află în noua extindere a temei și dacă proiecția actuală a hărții temei este egală cu noua proiecție a temei. Dacă `preserveExtentOnThemeSwitch = "force"`, extinderea actuală este păstrată, indiferent dacă se află în noua extindere a temei, dar proiecțiile actuale și noi ale hărții tematice trebuie să se potrivească în continuare.
 
-*Plugin configuration*:
-The plugin configuration is entered separately for desktop and for mobile mode. Refer to the [sample `config.json`](https://github.com/qgis/qwc2-demo-app/blob/master/static/config.json) for a list of available configuration options. Each plugin configuration block is of the format
+*Configurare plugin-ului*:
+Configurația pluginului este introdusă separat atât pentru desktop cât și pentru mobil. Consultați [exemplul `config.json`](https://github.com/qgis/qwc2-demo-app/blob/master/static/config.json) pentru o listă de opțiuni de configurare disponibile. Fiecare bloc de configurare ale plugin-urilor este scris în formatul:
 
     {
       "name": "<PluginName">,
@@ -161,66 +161,66 @@ The plugin configuration is entered separately for desktop and for mobile mode. 
       "mapClickAction": <"identify"|"unset"|null>
     }
 
-where
+unde
 
-* `name`: The plugin name
-* `cfg`: Optional: arbitrary configuration properties, directly passed to the relative plugin class as React props.
-* `mapClickAction`: Optional: for plugins which are associated to a viewer task (and typically linked in the `menuItems` or `toolbarItems` of the `TopBar`, see below), determines whether a click in the map will result in the identify tool being invoked, the task being unset, or whether no particular action should be performed (default). Note: `"mapClickAction"` should be `null` or omitted for plugins which handle mouse events on the map themselves. Can optionally also be specified directly in the `menuItems` or `toolbarItems` entries, see below.
+* `name`: Numele pluginului.
+* `cfg`: Opțional: proprietăți de configurare arbitrare, transmise direct clasei de plugin-uri relative ca elemente de React props.
+* `mapClickAction`: Opțional: pentru pluginurile care sunt asociate unei sarcini de vizualizare (și de obicei legate în `menuItems` sau `toolbarItems` ale `TopBar`, vezi mai jos), determină dacă un clic pe hartă va duce la apariția instrumentului de identificare, la anularea sarcinii sau dacă nu trebuie efectuată nicio acțiune anume (implicit). Mențiune: `"mapClickAction"` trebuie să fie `null` omis pentru pluginurile care gestionează acțiunile mouse-ului de pe hartă. Opțional, poate fi specificat și direct în `menuItems` sau `toolbarItems` datele introduse, vezi mai jos.
 
-You can omit a plugin entry to disable it in desktop and/or mobile mode. To completely remove a plugin from the compiled application, remove the corresponding entry in `js/appConfig.js`.
+Puteți omite un plugin pentru al dezactiva în modul desktop și/sau mobil. Pentru a elimina complet un plugin din aplicația compilată, eliminațil direct din `js/appConfig.js`.
 
-A particularly interesting aspect is the configuration of the entries in the application menu and toolbar, i.e. the entries in `menuItems` and `toolbarItems` in the `TopBar` configuration. The most common format for linking an entry to an existing plugin is
+Un aspect deosebit de interesant este configurarea datelor introduse din meniul aplicației și bara de instrumente, spre exemplu datele introduse din `menuItems` și `toolbarItems` în configurarea `TopBar` . Cel mai comun format pentru conectarea unor date introduse la un plugin existent este:
 
     {"key": "<key>", "icon": "<icon>", "themeWhitelist": ["<themename>", ...], "mapClickAction": <"identify"|"unset"|null>, "mode": "<mode>", "requireAuth": <true|false>}
 
-where
+unde
 
-* `key`: The name of the plugin to activate when the entry is clicked, i.e. `LayerTree`. Also used to lookup the label for the entry from the translations, using the `appmenu.items.<key>` message identifier (see <a href="#translations">Managing translations</a>).
-* `icon`: The icon of the entry, either a name (without the `.svg` extension) of an icon in `icons/`, or `:/<path_to_asset>` containing the path relative to `assetsPath` of an asset image.
-* `themeWhitelist`: Optional, allows specifying a whitelist of theme names or titles for which the entry should be visible.
-* `mapClickAction`: Optional, takes precedence over the `mapClickAction` setting specified in the plugin configuration block, if any. See above.
-* `mode`: Optional, depending on the plugin, a mode can be configured to launch the plugin directly in a specific mode. For instance, the `Measure` plugin supports specifying the measurement mode (`Point`, `LineString`, `Polygon`).
-* `requireAuth`: Optional, the entry is only visible when user is logged-in when true (works with qwc-services).
+* `key`: Numele pluginului de activat când se face clic pe date, spre exemplu `LayerTree`. De asemenea, folosit pentru a căuta eticheta pentru datele din traduceri, folosind `appmenu.items.<key>` message identifier (vezi <a href="#translations">Gestionarea traducerilor</a>).
+* `icon`: Pictograma datelor introduse, fie un nume (fără extensia `.svg`) a unei pictograme din `icons/`, sau `:/<path_to_asset>` conţinând calea către `assetsPath` a unei imagini de tip asset.
+* `themeWhitelist`: Opțional, permite specificarea unui whitelist (listă cu permisiuni) de nume de teme sau titluri pentru care intrarea ar trebui să fie vizibilă.
+* `mapClickAction`: Opțional, are prioritate asupra setării `mapClickAction` specificată în blocul de configurare a pluginului, dacă există. Vezi mai sus.
+* `mode`: Opțional, în funcție de plugin, un mod poate fi configurat pentru a lansa pluginul direct într-un anumit mod specificat. Spre exemplu, pluginul `Measure` acceptă specificarea modului de măsurare (`Point`, `LineString`, `Polygon`).
+* `requireAuth`: Opțional, the entry is only visible when user is logged-in when true (works with qwc-services).
 
-Additionally, entries opening external URLs can be defined as follows:
+În plus, intrările care deschid adrese URL externe pot fi definite așa:
 
     {"key": "<key>", "icon": "<icon>", "url": "<url>"}
 
-where
+unde
 
-* `Key: An arbitrary key name (not used by existing plugins), used to lookup the the label for the entry from the translations.
-* `icon`: As above.
-* `url`: The URL to open. Can contain as placeholders the keys listed in <a href="#url-parameters">URL parameters</a>, encolsed in `$` (i.e. `$e$` for the extent). In addition, the placeholders `$x$` and `$y$` for the individual map center coordinates are also supported.
+* `key`: Un nume de cheie arbitrar (nu este folosit de către pluginurile existente), folosit pentru a căuta eticheta pentru datele introduse din traduceri.
+* `icon`: Ca mai sus.
+* `url`: Adresa URL de accesat. Poate conține ca substituenți cheile enumerate în <a href="#url-parameters">URL parameters</a>, închise în `$` (ex. `$e$` pentru măsură). În plus, substituenții `$x$` și `$y$` pentru coordonatele individuale ale centrului hărții sunt de asemenea acceptate.
 
 
 
-### Theme configuration: QGIS projects and the `themesConfig.json` file
+### Configurarea temei: proiectele QGIS și a fișierului `themesConfig.json`
 
-A theme corresponds to a QGIS project, published as WMS and served by QGIS Server.
+O temă corespunde unui proiect QGIS, publicat ca WMS și servit de către QGIS Server.
 
-#### Creating and publishing a QGIS project
+#### Crearea și publicarea unui proiect QGIS
 
-The first step is to prepare a QGIS project. Besides the common tasks of adding and grouping layers, the following table gives an overview of settings which influence how the theme is displayed by QWC2:
+Primul pas este pregătirea unui proiect QGIS. Pe lângă sarcinile comune de adăugare și grupare a straturilor, următorul tabel oferă o prezentare generală a setărilor care influențează modul în care tema este afișată de QWC2:
 
-| What                 | Where                                     | Description                                      |
+| Cum se numește       | Unde se regăsește                         | Descriere                                        |
 |----------------------|-------------------------------------------|--------------------------------------------------|
-| Service capabilities | Project Properties &rarr; QGIS Server &rarr; Service capabilities | **Must** be checked for QGIS Server to publish the project. |
-| Service Metadata     | Project Properties &rarr; QGIS Server &rarr; Service capabilities | Shown in the theme info dialog, invokable from the Layer Tree panel titlebar. |
-| Title, keywords      | Project Properties &rarr; QGIS Server &rarr; Service capabilities | Theme title, displayed in the Theme Switcher, and keywords, useful for filtering. |
-| Queryable layers     | Project Properties &rarr; Data sources | Mark layers as identifyable by the client.       |
-| FeatureInfo geometry | Project Properties &rarr; QGIS Server &rarr; WMS Capabilities &rarr; Add geometry to feature response | Return feature geometries with the GetFeatureInfo request. Allows the client to highlight the selected features. |
-| Layer Display Field  | Vector Layer Properties &rarr; Display    | The field used in the identify results. |
-| Layer Map Tip        | Vector Layer Properties &rarr; Display    | The contents of the Map Tip shown when hovering over layers in the client, if displaying Map Tips is enabled in the Layer Tree. |
-| Layer Metadata       | Layer Properties &rarr; QGIS Server       | Shown in the client Layer Info dialog, invokable from the Layer Tree. |
-| Scale range          | Layer Properties &rarr; Rendering &rarr; Scale dependent visibility | The scale range within which a layer is visible, useful to improve rendering performance. |
-| Initial visibility   | Layers Panel                              | Initial visibility of layers and groups.         |
-| Rendering order      | Layer Order Panel or Layers Panel         | Rendering order of the layers. If layer re-ordering is enabled in `config.json`, the order from the Layer Order Panel is ignored. |
-| Print layouts        | Layout manager                            | The print layouts offered in the Print plugin.   |
-| Print layout labels  | Layout manager                            | Print layout labels with an ID will be exposed in the Print plugin. |
+| Service capabilities | Project Properties &rarr; QGIS Server &rarr; Service capabilities | **Trebuie** să fie bifat pentru QGIS Server pentru a publica proiectul. |
+| Service Metadata     | Project Properties &rarr; QGIS Server &rarr; Service capabilities | Afișat în dialogul de informații despre temă, accesibil din bara de sus a panoului Layer Tree. |
+| Title, keywords      | Project Properties &rarr; QGIS Server &rarr; Service capabilities | Theme title, afișat în Theme Switcher, and keywords, util pentru filtrări. |
+| Queryable layers     | Project Properties &rarr; Data sources | Marcați straturile ca identificabile de către client.       |
+| FeatureInfo geometry | Project Properties &rarr; QGIS Server &rarr; WMS Capabilities &rarr; Add geometry to feature response | Returnați geometriile elementelor cu GetFeatureInfo.Permite clientului să evidențieze elementele selectate. |
+| Layer Display Field  | Vector Layer Properties &rarr; Display    | Câmpul utilizat pentru identificarea rezultatelor. |
+| Layer Map Tip        | Vector Layer Properties &rarr; Display    | Conținutul din Map Tip afișat când treceți cu mouse-ul peste straturi, dacă este afișat Map Tips este activ în Layer Tree. |
+| Layer Metadata       | Layer Properties &rarr; QGIS Server       | Afișat în Layer Info, accesibil din Layer Tree. |
+| Scale range          | Layer Properties &rarr; Rendering &rarr; Scale dependent visibility | Intervalul de scară în care este vizibil un strat, util pentru a îmbunătăți performanța de randare. |
+| Initial visibility   | Layers Panel                              | Vizibilitatea inițială a straturilor și a grupurilor. |
+| Rendering order      | Layer Order Panel or Layers Panel         | Ordinea de apariție a straturilor. Dacă layer re-ordering este activ în `config.json`, ordinea din Layer Order Panel este ignorată. |
+| Print layouts        | Layout manager                            | Moduri de imprimate oferite de pluginul Print.  |
+| Print layout labels  | Layout manager                            | Etichetele de imprimare cu un ID o să fie vizibile în pluginul Print. |
 
-#### <a name="themesConfig-json"></a>Configuring the themes in `themesConfig.json`
+#### <a name="themesConfig-json"></a>Configurarea temei din `themesConfig.json`
 
-The second step is to configure the themes which are available to QWC2 in the `themesConfig.json` file, which contains a list of themes, optionally organized in groups, as well as a list of background layers:
+Al doilea pas este să configurați temele care sunt disponibile pentru QWC2 în fișierul `themesConfig.json`, care conține o listă de teme, opțional organizate în grupuri, precum și o listă de straturi de fundal::
 
     {
       "themes": {
@@ -254,80 +254,80 @@ The second step is to configure the themes which are available to QWC2 in the `t
       "defaultPrintGrid": [<Print grid, see below>]
     }
 
-Refer to the [sample `themesConfig.json`](https://github.com/qgis/qwc2-demo-app/blob/master/themesConfig.json) for a complete example.
+RConsultați [exemplul `themesConfig.json`](https://github.com/qgis/qwc2-demo-app/blob/master/themesConfig.json).
 
-The format of the theme definitions is as follows:
+Formatul temei este următorul:
 <!-- Important: Use U+00A0 non-breaking spaces ( ) in code blocks -->
-| Entry                                        | Description                                                                       |
+| Date introduse                               | Descriere                                                                         |
 |----------------------------------------------|-----------------------------------------------------------------------------------|
-| `"url": "<WMS URL>",`                        | The address of desired WMS served by QGIS Server.                                 |
-| `"wmsBasicAuth": "{`                         | Optional, allows to authenticate to QGIS Server during themes.json generation. NOTE: these credentials will solely be used by `yarn run themesConfig` and won't be stored in `themes.json`.|
-| `  "username": <username>`                   | Optional: http basic authentication username.                                     |
-| `  "password": <password>`                   | Optional: http basic authentication password.                                     |
+| `"url": "<WMS URL>",`                        | Adresa WMS-ului dorit deservit de QGIS Server.                                    |
+| `"wmsBasicAuth": "{`                         | Opțional, permite autentificarea la QGIS Server cu ajutorul themes.json. Mențiune: aceste acreditări vor fi utilizate numai de `yarn run themesConfig` și nu vor fi salvate în `themes.json`.|
+| `  "username": <username>`                   | Opțional: Nume de utilizator pentru autentificare de tip http.                    |
+| `  "password": <password>`                   | Opțional: Parolă pentru autentificare de tip http..                              |
 | `},`                                         |                                                                                   |
-| `"title": "<Custom title>",`                 | Optional, override WMS title.                                                     |
-| `"description": "<Description>",`            | Optional, an additional description to show below the theme title.                |
-| `"thumbnail": "<Filename>",`                 | Optional, image file in `assets/img/mapthumbs`. If omitted, autogenerated via WMS GetMap. |
-| `"attribution": "<Attribution>",`            | Optional, attribution which will be shown in the bottom right corner of the map.  |
-| `"attributionUrl": "<URL>",`                 | Optional, link associated to the attribution                                      |
-| `"default": true,`                           | Whether to use this theme as initial theme                                        |
-| `"scales": [<Scale denominators>],`          | List of denominators of allowed map scales. If omitted, defaults to `defaultScales`. |
-| `"printScales": [<Scale denominators>],`     | List of denominators of allowed print scales. If omitted, defaults to `defaultPrintScales`. |
-| `"printResolutions": [<DPIs>],`              | List of available print resolutions. If omitted, defaults to `defaultPrintResolutions`. |
-| `"printGrid": [`                             | List of grid scale-dependent grid intervals to use when printing. If omitted, defaults to `defaultPrintGrid`. |
-| `  {"s": <Scale1>, x: <Interval1>, y: <Interval1>},` | Keep this list sorted in descending order by scale denominator.           |
-| `  {"s": <Scale2>, x: <Interval2>, y: <Interval2>}`  | In this example, `{x: <Interval2>, y: <Interval2>}` will be used for `<Scale1> > Scale >= <Scale2>`.  |
+| `"title": "<Custom title>",`                 | Opțional, suprascrie titlul WMS.                                                  |
+| `"description": "<Description>",`            | Opțional, o descriere suplimentară de afișat sub titlul temei.                    |
+| `"thumbnail": "<Filename>",`                 | Opțional, fișierele tip imagine din `assets/img/mapthumbs`.Dacă este omis, se generează automat prin WMS GetMap. |
+| `"attribution": "<Attribution>",`            | Opțional, atribuții care vor fi afișate în colțul din dreapta jos al hărții.      |
+| `"attributionUrl": "<URL>",`                 | Opțional, link asociat atribuirii.                                                |
+| `"default": true,`                           | Dacă să folosiți această temă ca temă implicită                                     |
+| `"scales": [<Scale denominators>],`          | Lista numitorilor scărilor permise de hărți. Dacă este omis, este implicit `defaultScales`. |
+| `"printScales": [<Scale denominators>],`     | Lista numitorilor scalelor de imprimare permise. Dacă este omis, este implicit `defaultPrintScales`. |
+| `"printResolutions": [<DPIs>],`              | Lista rezoluțiilor de imprimare disponibile. Dacă este omis, este implicit `defaultPrintResolutions`. |
+| `"printGrid": [`                             | Lista intervalelor de grilă în funcție de scara grilei de utilizat la imprimare. Dacă este omis, este implicit `defaultPrintGrid`. |
+| `  {"s": <Scale1>, x: <Interval1>, y: <Interval1>},` | Păstrați această listă sortată în ordine descrescătoare după numitorul de scară.           |
+| `  {"s": <Scale2>, x: <Interval2>, y: <Interval2>}`  | În acest exemplu, `{x: <Interval2>, y: <Interval2>}` o să fie folosit așa `<Scale1> > Scale >= <Scale2>`.  |
 | `],`                                          |                                                                                  |
-| `"printLabelForSearchResult": "<ID>",`        | Optional, an ID of a print layout label to which the current search result text (if any) will be written to when printing. |
-| `"printLabelConfig": {`                       | Optional, configuration of the text input fields for print layout labels.        |
-| `  "<LabelId>": {"rows": <n>, "maxLength": <n>},` | Height of the input field in rows and maximum number of allowed characters. |
+| `"printLabelForSearchResult": "<ID>",`        | Opțional, un ID al unei etichete de aspect de tipărire în care va fi scris textul curent al rezultatului căutării (dacă există) la imprimare. |
+| `"printLabelConfig": {`                       | Opțional, configurarea câmpurilor de introducere a textului pentru imprimarea etichetelor.        |
+| `  "<LabelId>": {"rows": <n>, "maxLength": <n>},` | Înălțimea câmpului de introducere în rânduri și numărul maxim de caractere permise. |
 | `},`                                          |                                                                                  |
-| `"mapCrs: "<EPSG code>",`                     | Optional, map projection, defaults to `EPSG:3857`.                               |
-| `"extent": [<xmin>, <ymin>, <xmax>, <ymax>],` | Optional, override theme extent. In `mapCrs`.                                    |
-| `"tiled": <boolean>,`                         | Optional, use tiled WMS, defaults to `false`.                                    |
-| `"format": "<mimetype>",`                     | Optional, the format to use for WMS GetMap. Defaults to `image/png`.             |
-| `"externalLayers": [{`                        | Optional, external layers to use as replacements for internal layers, see below. |
-| `  "name": "<external_layer_name>",`          | Name of the external layer, matching a `ExternalLayerDefinition`, see below.     |
-| `  "internalLayer": "<QGis_layer_name>"`      | Name of an internal layer, as contained in the QGIS project, to replace with the external layer. |
+| `"mapCrs: "<EPSG code>",`                     | Opțional, proiecția hărții, setată implicit la `EPSG:3857`.                               |
+| `"extent": [<xmin>, <ymin>, <xmax>, <ymax>],` | Opțional, suprascrie extinderea temei. Din `mapCrs`.                                    |
+| `"tiled": <boolean>,`                         | Opțional, utilizați tiled WMS, implicit `false`.                                    |
+| `"format": "<mimetype>",`                     | Opțional, formatul de utilizat pentru WMS GetMap. Implicit `image/png`.             |
+| `"externalLayers": [{`                        | Opțional, straturi externe de utilizat ca înlocuitori pentru straturile interne, vezi mai jos. |
+| `  "name": "<external_layer_name>",`          | Numele stratului extern, care se potrivește cu `ExternalLayerDefinition`, vezi mai jos.     |
+| `  "internalLayer": "<QGis_layer_name>"`      | Numele unui strat intern, așa cum este conținut în proiectul QGIS, de înlocuit cu stratul extern. |
 | `}],`                                         |                                                                                  |
-| `"themeInfoLinks": {`                         | Optional, custom links to additional resources, shown as a menu in the theme selector in the theme switcher.\
-| `  "title": "<Menu title>",`                  | An arbitrary string shown as title of the menu.                                  |
-| `  "titleMsgId": "<Menu title msgID>",`       | Alternative to `title`, a message ID, translated through the translation files.  |
-| `  "entries": [<link_name>, ...]`             | List of theme info link names, see below.                                        |
+| `"themeInfoLinks": {`                         | Opțional, linkuri personalizate către resurse suplimentare, afișate ca meniu în selectorul de teme din theme switcher. |
+| `  "title": "<Menu title>",`                  | Un șir arbitrar afișat drept titlu al meniului.                                  |
+| `  "titleMsgId": "<Menu title msgID>",`       | O alternativă la `title`, un ID de mesaj, tradus prin fișierele de traducere.  |
+| `  "entries": [<link_name>, ...]`             | Lista numelor de linkuri cu informații despre teme, vezi mai jos.                                        |
 | `},`                                          |                                                                                  |
-| `"backgroundLayers": [{,`                     | Optional, list of available background layers.                                   |
-| `  "name": "<Background layer name>",`        | Name of matching `BackgroundLayerDefinition`, see below.                         |
-| `  "printLayer": "<QGis layer name>"\|[<list>],`| Optional, name of layer to use as matching background layer when printing. Alternatively, a list `[{"maxScale": <scale>, "name": "<QGis layer name>"}, ..., {"maxScale": null, "name": "<QGis layer name>"}]` can be provided, ordered in ascending order by `maxScale`. The last entry should have `maxScale` `null`, as the layer used for all remaining scales. If omitted, no background is printed, unless layer is of type "wms" and `printExternalLayers` is `true` in the Print plugin configuration. |
-| `  "visibility": <boolean>`                   | Optional, initial visibility of the layer when theme is loaded.                  |
+| `"backgroundLayers": [{,`                     | Opțional, lista de straturi de fundal disponibile.                                   |
+| `  "name": "<Background layer name>",`        | Numele potrivirii cu `BackgroundLayerDefinition`, vezi mai jos.                         |
+| `  "printLayer": "<QGis layer name>"\|[<list>],`| Opțional, numele stratului de utilizat ca strat de fundal potrivit la imprimare. Alternativ, o listă `[{"maxScale": <scale>, "name": "<QGis layer name>"}, ..., {"maxScale": null, "name": "<QGis layer name>"}]` pot fi furnizate, ordonate în ordine crescătoare de `maxScale`. Ultima intrare ar trebui să aibă `maxScale` `null`, ca strat folosit pentru toate scările rămase. Dacă este omis, fundalul nu este tipărit, atât timp cât stratul nu este de tip "wms" și `printExternalLayers` este `true` în configurarea pluginului Print. |
+| `  "visibility": <boolean>`                   | Opțional, vizibilitatea inițială a stratului atunci când tema este încărcată.                 |
 | `}],`                                         |                                                                                  |
-| `"searchProviders": ["<ProviderId>"],`        | Optional, list of search providers IDs. An ID corresponds to the key of the exported `SearchProviders` object in `js/SearchProviders.js`. |
-| `"minSearchScaleDenom": <number>,`                 | Optional, minimum scale to enforce when zooming to search results. Takes precedence over value in `config.json`. |
-| `"featureReport": {`                          | Optional, available feature report templates.                                    |
-| `  "<LayerId>": "<TemplateID>"  `             | WMS sublayer ID and associated template ID to pass to the `featureReportService`.|
+| `"searchProviders": ["<ProviderId>"],`        | Opțional, lista ID-urilor furnizorilor de căutare. Un ID corespunde cheii exportului din `SearchProviders` aflat în `js/SearchProviders.js`. |
+| `"minSearchScaleDenom": <number>,`                 | Opțional, scara minimă de aplicat atunci când măriți rezultatele căutării. Are prioritate față de valoarea din `config.json`. |
+| `"featureReport": {`                          | Opțional, șabloane disponibile de rapoarte de caracteristici.                                   |
+| `  "<LayerId>": "<TemplateID>"  `             |ID-ul substratului WMS și ID-ul șablonului asociat pentru a le transmite în `featureReportService`.|
 | `},`                                          |                                                                                  |
-| `"additionalMouseCrs": ["<EPSG code>"],`      | Optional, list of additional projections for displaying the mouse position. WGS84 and `mapCrs` are available by default. Additional projections definitions must be added to `js/appConfig.js` or `config.json`.         |
-| `"watermark": {`                              | Optional, configuration of watermark to add to raster export images.             |
-| `  "text": "<text>",`                         | Arbitrary text.                                                                  |
-| `  "texpadding": <number>,`                   | Optional, padding between text and frame, in points.                             |
-| `  "fontsize": <number>,`                     | Optional, font size.                                                             |
-| `  "fontfamily": "<Font family>",`            | Optional, font family.                                                           |
-| `  "fontcolor": "#RRGGBB",`                   | Optional, font color.                                                            |
-| `  "backgroundcolor": "#RRGGBB",`             | Optional, frame background color.                                                |
-| `  "framecolor": "#RRGGBB",`                  | Optional, frame color.                                                           |
-| `  "framewidth": <number>,`                   | Optional, frame width.                                                           |
+| `"additionalMouseCrs": ["<EPSG code>"],`      | Opțional, lista de proiecții suplimentare pentru afișarea poziției mouse-ului. WGS84 și `mapCrs` sunt disponibile implicit. Trebuie de asemenea adăugate definiții suplimentare pentru proiecții în `js/appConfig.js` sau `config.json`.         |
+| `"watermark": {`                              | Opțional, configurația ștampilei de adăugat la imaginile de export raster.            |
+| `  "text": "<text>",`                         | Text arbitrar                                                                 |
+| `  "texpadding": <number>,`                   | Opțional, spațiu între text și cadru.                             |
+| `  "fontsize": <number>,`                     | Opțional, mărimea textului.                                                             |
+| `  "fontfamily": "<Font family>",`            | Opțional, familia din care face parte textul.                                                           |
+| `  "fontcolor": "#RRGGBB",`                   | Opțional, culoarea textului.                                                            |
+| `  "backgroundcolor": "#RRGGBB",`             | Opțional, culoarea de fundal a cadruluii.                                                |
+| `  "framecolor": "#RRGGBB",`                  | Opțional, culoarea cadruluii.                                                           |
+| `  "framewidth": <number>,`                   | Opțional, lățimea cadruluii.                                                           |
 | `},`                                          |                                                                                  |
-| `"collapseLayerGroupsBelowLevel": <level>,`   | Optional, layer tree level below which to initially collapse groups. By default the tree is completely expanded. |
-| `"skipEmptyFeatureAttributes": <boolean>,`    | Optional, whether to skip empty attributes in the identify results. Default is `false`. |
-| `"mapTips":  <boolean>\|null,`                | Optional, per-theme setting whether map-tips are unavailable (`null`), disabled by default (`false`) or enabled by default (`true`). |
-| `"extraLegendParameters": "<&KEY=VALUE>",`    | Optional, additional query parameters to append to WMS GetLegendGraphic.         |
-| `"printLabelBlacklist":  ["<LabelId>", ...]`  | Optional, list of composer label ids to not expose in the print dialog. |
-| `"editConfig": "<editConfig.json>"`           | Optional, object or path to a filename containing the editing configuration for the theme, see [EditingInterface.js](#editing-interface). |
-| `"config": {`                                 | Optional, per-theme configuration entries which override the global entries in `config.json`.|
-| `  "allowRemovingThemeLayers": <boolean>`     | See [`config.json`](#config-json-overrideable) for which settings can be specified here. |
+| `"collapseLayerGroupsBelowLevel": <level>,`   | Opțional, stratul nivel al arborelui sub care să restrângeți inițial grupurile. În mod implicit, arborele este complet extins. |
+| `"skipEmptyFeatureAttributes": <boolean>,`    | Opțional, dacă să omiteți atributele goale în rezultatele de identificare.Implicit `false`. |
+| `"mapTips":  <boolean>\|null,`                | Opțional, setarea pentru fiecare temă dacă map-tips nu este disponibil (`null`), dezactivat implicit (`false`) sau activat implicit (`true`). |
+| `"extraLegendParameters": "<&KEY=VALUE>",`    | Opțional, parametri suplimentari de interogare la care să se atașeze la WMS GetLegendGraphic.         |
+| `"printLabelBlacklist":  ["<LabelId>", ...]`  | Opțional, lista de ID-uri cu etichetă pentru a nu se afișa în fereastra de imprimare. |
+| `"editConfig": "<editConfig.json>"`           | Opțional, obiect sau calea către un nume de fișier care conține configurația de editare pentru temă, vezi [EditingInterface.js](#editing-interface). |
+| `"config": {`                                 | Opțional, date de configurare pe temă care înlocuiesc datele introduse global în `config.json`.|
+| `  "allowRemovingThemeLayers": <boolean>`     | Vezi [`config.json`](#config-json-overrideable) pentru setările care pot fi specificate aici. |
 | `  ...`                                       |                                                                                  |
 | `}`                                           |
 
-**External layers:**
+**Straturi externe:**
 External layers can be used to selectively replace layers in a QGIS project, for instance in the case of a WMS layer embedded in a QGIS project, to avoid cascading WMS requests. They are handled transparently by QWC2 (they are positioned in the layer tree identically to the internal layer they replace), but the `GetMap` and `GetFeatureInfo` requests are sent directly to the specified WMS Service.
 
 The format for external layer definitions is as follows:
